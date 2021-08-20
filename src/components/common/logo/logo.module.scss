@@ -1,0 +1,15 @@
+.body {
+	width: 55px;
+	height: 55px;
+	background: rgb(22, 22, 22);
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	& span {
+		font-size: 10px;
+		color: #fff;
+		user-select: none;
+	}
+}

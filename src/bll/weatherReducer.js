@@ -2,6 +2,8 @@
 // IMPORTS
 // Main
 
+import { weatherAPI } from '../api/weatherAPI'
+
 // ====================================================
 // Types
 
@@ -77,6 +79,14 @@ export const setWeatherSuccess = payload => ({ type: SET_WEATHER, payload })
 
 // ====================================================
 // Thunks
+
+export const getWeather = () => {
+	return async (dispatch, getState) => {
+		let state = getState()
+		console.log(state)
+		// weatherAPI.getWeatherAPI()
+	}
+}
 
 // ====================================================
 // Exports

@@ -1,0 +1,156 @@
+body._lock {
+	overflow: hidden;
+}
+.header {
+	height: 70px;
+	border-bottom: 1px rgb(190, 190, 190) solid;
+
+	// ==========================================
+
+	&__inner {
+		height: 70px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	// ==========================================
+
+	.menu {
+		width: 100%;
+		height: 70px;
+
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		@media (max-width: 767px) {
+			&__body {
+				z-index: 4;
+				position: fixed;
+				top: 0;
+				left: -100%;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.9);
+				padding: 100px 30px 30px 30px;
+				transition: left 0.3s ease 0s;
+				overflow: auto;
+			}
+			.menu__body._active {
+				left: 0%;
+
+				&::before {
+					content: '';
+					width: 100%;
+					height: 60px;
+					position: fixed;
+					top: 0;
+					left: 0;
+					background: rgb(22, 22, 22);
+				}
+			}
+		}
+
+		// ==========================================
+
+		&__list {
+			@media (min-width: 767px) {
+				width: 600px;
+				margin: 0;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.menu__list li {
+					margin: 0;
+					text-align: start;
+				}
+			}
+
+			@media (max-screen: 767px) {
+				& li {
+					margin-bottom: 30px;
+					text-align: center;
+				}
+			}
+		}
+
+		&__link {
+			font-weight: 600;
+			font-size: 14px;
+			color: rgb(0, 0, 0);
+
+			&:hover {
+				color: rgb(110, 110, 110);
+			}
+
+			@media (max-width: 767px) {
+				font-size: 24px;
+			}
+		}
+		// &__linkActive {
+		// 	color: rgb(165, 165, 165);
+		// }
+
+		// ==========================================
+
+		&__icon {
+			display: none;
+		}
+	}
+
+	// ==========================================
+
+	@media (max-width: 767px) {
+		.menu__list-main {
+			display: none;
+		}
+		.menu__icon {
+			z-index: 5;
+			display: block;
+			position: relative;
+			width: 30px;
+			height: 18px;
+			cursor: pointer;
+
+			&::before,
+			&::after,
+			& span {
+				left: 0;
+				position: absolute;
+				height: 10%;
+				width: 100%;
+				background: #fff;
+			}
+
+			&::before,
+			&::after {
+				content: '';
+				transition: 0.4s;
+			}
+
+			&::before {
+				top: 0;
+			}
+			&::after {
+				bottom: 0;
+			}
+			& span {
+				top: 50%;
+				transform: scale(1) translate(0px, -50%);
+			}
+		}
+		.menu__icon._active span {
+			transform: scale(0) translate(0px, -50%);
+		}
+		.menu__icon._active::before {
+			top: 50%;
+			transform: rotate(-45deg) translate(0px, -50%);
+		}
+		.menu__icon._active::after {
+			bottom: 50%;
+			transform: rotate(45deg) translate(0px, 50%);
+		}
+	}
+}

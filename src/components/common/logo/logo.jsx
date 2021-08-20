@@ -7,7 +7,13 @@ import styles from './logo.module.scss'
 // Component
 
 const Logo = () => {
-	return <div className={styles.body}>Logo</div>
+	return (
+		<div className={styles.body}>
+			<span>Zahar's</span>
+			<span>Weather</span>
+			<span>App</span>
+		</div>
+	)
 }
 
 // ====================================================
