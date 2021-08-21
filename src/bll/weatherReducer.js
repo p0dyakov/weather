@@ -80,11 +80,13 @@ export const setWeatherSuccess = payload => ({ type: SET_WEATHER, payload })
 // ====================================================
 // Thunks
 
-export const getWeather = () => {
+export const getWeather = resolve => {
 	return async (dispatch, getState) => {
 		let state = getState()
-		console.log(state)
-		// weatherAPI.getWeatherAPI()
+		weatherAPI.getWeatherAPI(state.app.position.sity).then(response => {
+			console.log(response)
+			resolve(dispatch(setWeatherSuccess(response.data)))
+		})
 	}
 }
 

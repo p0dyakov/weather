@@ -17,7 +17,9 @@ const api = {
 export const weatherAPI = {
 	getWeatherAPI: city => {
 		return axios.get(
-			`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`
+			`${api.base}weather?q=${city ? city : 'London'}&units=metric&APPID=${
+				api.key
+			}`
 		)
 	},
 }

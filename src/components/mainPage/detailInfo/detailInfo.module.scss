@@ -1,0 +1,18 @@
+.body {
+	margin-top: 70px;
+	.title {
+		font-weight: 600;
+	}
+	.feelsLike {
+		&__temp {
+			margin-top: 25px;
+			font-size: 30px;
+			font-weight: 500;
+		}
+		&__title {
+			font-size: 11px;
+			margin-top: -10px;
+			color: rgb(141, 141, 141);
+		}
+	}
+}

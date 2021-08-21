@@ -4,10 +4,10 @@
 import './styles/zeroing.scss'
 import './styles/style.scss'
 import MainPage from './components/mainPage/mainPage.container'
+import Loading from './components/common/loading/loading'
 import { Redirect, Route } from 'react-router-dom'
 import { useEffect } from 'react'
-import { getPosition, getDate } from './bll/appReducer'
-import { getWeather } from './bll/weatherReducer'
+import { initialize } from './bll/appReducer'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 
@@ -16,18 +16,22 @@ import { connect } from 'react-redux'
 
 const App = props => {
 	useEffect(() => {
-		props.getPosition()
-		props.getDate()
-		props.getWeather()
+		props.initialize()
 	}, [])
 
 	return (
 		<>
-			<Route
-				path="/weather/:day?"
-				render={() => <MainPage key={window.location.pathname} />}
-			/>
-			<Redirect from="*" to="/weather/today" />
+			{props.initialized === false ? (
+				<Loading small={false} />
+			) : (
+				<>
+					<Route
+						path="/weather/:day?"
+						render={() => <MainPage key={window.location.pathname} />}
+					/>
+					<Redirect from="*" to="/weather/today" />
+				</>
+			)}
 		</>
 	)
 }
@@ -35,7 +39,5 @@ const App = props => {
 // ====================================================
 // Exports
 
-let mapStateToProps = state => ({ getWeather })
-export default compose(
-	connect(mapStateToProps, { getPosition, getDate, getWeather })
-)(App)
+let mapStateToProps = state => ({ initialized: state.app.initialized })
+export default compose(connect(mapStateToProps, { initialize }))(App)

@@ -4,12 +4,14 @@
 
 import { positionAPI } from '../api/positionAPI'
 import { days, months } from '../variables/dateVars'
+import { getWeather } from './weatherReducer'
 
 // ====================================================
 // Types
 
 const SET_POSITION = 'SET_POSITION'
 const SET_DATE = 'SET_DATE'
+const SET_INITIALIZED = 'SET_INITIALIZED'
 
 // ====================================================
 // Initial state
@@ -25,6 +27,7 @@ let initialState = {
 		month: null,
 		day: null,
 	},
+	initialized: false,
 }
 
 // ====================================================
@@ -48,6 +51,12 @@ const appReducer = (state = initialState, action) => {
 				},
 			}
 
+		case SET_INITIALIZED:
+			return {
+				...state,
+				initialized: action.payload,
+			}
+
 		default:
 			return state
 	}
@@ -58,34 +67,42 @@ const appReducer = (state = initialState, action) => {
 
 export const setPositionSuccess = payload => ({ type: SET_POSITION, payload })
 export const setDateSuccess = payload => ({ type: SET_DATE, payload })
+export const setInitialized = payload => ({ type: SET_INITIALIZED, payload })
 
 // ====================================================
 // Thunks
 
-export const getPosition = () => {
+export const getPosition = resolve => {
 	return async dispatch => {
 		navigator.geolocation.getCurrentPosition(function (position) {
 			let sco = `${position.coords.longitude},${position.coords.latitude}`
-			positionAPI.getAddress(sco).then(response => {
-				let country =
-					response.data.response.GeoObjectCollection.featureMember[0].GeoObject
-						.metaDataProperty.GeocoderMetaData.Address.Components[0].name
+			positionAPI
+				.getAddress(sco)
+				.then(response => {
+					let country =
+						response.data.response.GeoObjectCollection.featureMember[0]
+							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[0]
+							.name
 
-				let region =
-					response.data.response.GeoObjectCollection.featureMember[0].GeoObject
-						.metaDataProperty.GeocoderMetaData.Address.Components[2].name
+					let region =
+						response.data.response.GeoObjectCollection.featureMember[0]
+							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[2]
+							.name
 
-				let sity =
-					response.data.response.GeoObjectCollection.featureMember[0].GeoObject
-						.metaDataProperty.GeocoderMetaData.Address.Components[4].name
+					let sity =
+						response.data.response.GeoObjectCollection.featureMember[0]
+							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[4]
+							.name
 
-				let address = { country, region, sity }
-				dispatch(setPositionSuccess(address))
-			})
+					return { country, region, sity }
+				})
+				.then(address => {
+					resolve(dispatch(setPositionSuccess(address)))
+				})
 		})
 	}
 }
-export const getDate = () => {
+export const getDate = resolve => {
 	return async dispatch => {
 		let d = new Date()
 
@@ -94,14 +111,30 @@ export const getDate = () => {
 		let month = months[d.getMonth()]
 		let year = d.getFullYear()
 
-		dispatch(setDateSuccess({ year, month, date, day }))
+		resolve(dispatch(setDateSuccess({ year, month, date, day })))
 	}
 }
-export const initilize = () => {
+export const initialize = () => {
 	return async dispatch => {
-await
+		new Promise(function (resolve, reject) {
+			dispatch(getPosition(resolve))
+		})
+			.then(
+				new Promise(function (resolve, reject) {
+					dispatch(getWeather(resolve))
+				})
+			)
+			.then(() => {
+				new Promise(function (resolve, reject) {
+					dispatch(getDate(resolve))
+				})
+			})
+			.then(() => {
+				dispatch(setInitialized(true))
+			})
 	}
 }
+
 // ====================================================
 // Exports
 

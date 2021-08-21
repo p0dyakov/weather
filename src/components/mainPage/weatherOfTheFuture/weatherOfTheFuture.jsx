@@ -7,7 +7,7 @@ import styles from './weatherOfTheFuture.module.scss'
 // Component
 
 const WeatherOfTheFuture = () => {
-	return <div className={styles.body}>WeatherOfTheFuture</div>
+	return <div className={styles.body}></div>
 }
 
 // ====================================================
