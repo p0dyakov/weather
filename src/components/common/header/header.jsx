@@ -4,13 +4,24 @@
 import styles from './header.module.scss'
 import Logo from '../logo/logo'
 import { NavLink } from 'react-router-dom'
+import { colours } from '../../../variables/coloursVars'
 
 // ====================================================
 // Component
 
+const style = {
+	header: {
+		borderBottom: `1px ${colours.secondElementsColor} solid`,
+		background: `${colours.background}`,
+	},
+	navlink: {
+		color: `${colours.firstTextColor}`,
+	},
+}
+
 const Header = props => {
 	return (
-		<header className={styles.header}>
+		<header className={styles.header} style={style.header}>
 			<div className="container">
 				<div className={styles.header__inner}>
 					<Logo />
@@ -26,6 +37,7 @@ const Header = props => {
 									<NavLink
 										to="/weather/today"
 										className={styles.menu__link}
+										style={style.navlink}
 										activeClassName={styles.menu__linkActive}
 									>
 										Today
@@ -34,6 +46,7 @@ const Header = props => {
 								<li>
 									<NavLink
 										to="/weather/weekend"
+										style={style.navlink}
 										className={styles.menu__link}
 										activeClassName={styles.menu__linkActive}
 									>
@@ -42,20 +55,12 @@ const Header = props => {
 								</li>
 								<li>
 									<NavLink
-										to="/weather/tenDays"
+										to="/weather/16Days"
+										style={style.navlink}
 										className={styles.menu__link}
 										activeClassName={styles.menu__linkActive}
 									>
-										10-day
-									</NavLink>
-								</li>
-								<li>
-									<NavLink
-										to="/weather/monthly"
-										className={styles.menu__link}
-										activeClassName={styles.menu__linkActive}
-									>
-										Monthly
+										16-days
 									</NavLink>
 								</li>
 							</ul>

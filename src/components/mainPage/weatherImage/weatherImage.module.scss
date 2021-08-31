@@ -1,0 +1,17 @@
+.body {
+	display: flex;
+	justify-content: flex-end;
+	.image {
+		width: 400px;
+		height: 400px;
+		position: relative;
+		& img {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			right: 0;
+			object-fit: cover;
+		}
+	}
+}

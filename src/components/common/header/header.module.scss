@@ -3,7 +3,7 @@ body._lock {
 }
 .header {
 	height: 70px;
-	border-bottom: 1px rgb(190, 190, 190) solid;
+	margin-bottom: 100px;
 
 	// ==========================================
 
@@ -79,12 +79,9 @@ body._lock {
 		&__link {
 			font-weight: 600;
 			font-size: 14px;
-			color: rgb(0, 0, 0);
-
 			&:hover {
-				color: rgb(110, 110, 110);
+				color: red;
 			}
-
 			@media (max-width: 767px) {
 				font-size: 24px;
 			}

@@ -84,8 +84,11 @@ export const getWeather = resolve => {
 	return async (dispatch, getState) => {
 		let state = getState()
 		weatherAPI.getWeatherAPI(state.app.position.sity).then(response => {
-			console.log(response)
-			resolve(dispatch(setWeatherSuccess(response.data)))
+			if (resolve) {
+				resolve(dispatch(setWeatherSuccess(response.data)))
+			} else {
+				dispatch(setWeatherSuccess(response.data))
+			}
 		})
 	}
 }

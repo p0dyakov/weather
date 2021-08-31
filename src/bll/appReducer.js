@@ -3,8 +3,9 @@
 // Main
 
 import { positionAPI } from '../api/positionAPI'
+import { weatherAPI } from '../api/weatherAPI'
 import { days, months } from '../variables/dateVars'
-import { getWeather } from './weatherReducer'
+import { getWeather, setWeatherSuccess } from './weatherReducer'
 
 // ====================================================
 // Types
@@ -76,6 +77,10 @@ export const getPosition = resolve => {
 	return async dispatch => {
 		navigator.geolocation.getCurrentPosition(function (position) {
 			let sco = `${position.coords.longitude},${position.coords.latitude}`
+			let scoForApi = {
+				lon: position.coords.longitude,
+				lat: position.coords.latitude,
+			}
 			positionAPI
 				.getAddress(sco)
 				.then(response => {
@@ -89,15 +94,24 @@ export const getPosition = resolve => {
 							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[2]
 							.name
 
-					let sity =
-						response.data.response.GeoObjectCollection.featureMember[0]
-							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[4]
-							.name
+					let sity = response.data.response.GeoObjectCollection.featureMember[0]
+						.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[4]
+						? response.data.response.GeoObjectCollection.featureMember[0]
+								.GeoObject.metaDataProperty.GeocoderMetaData.Address
+								.Components[4].name
+						: null
 
 					return { country, region, sity }
 				})
 				.then(address => {
-					resolve(dispatch(setPositionSuccess(address)))
+					dispatch(setPositionSuccess(address))
+				})
+				.then(() => {
+					if (resolve) {
+						resolve(scoForApi)
+					} else {
+						return scoForApi
+					}
 				})
 		})
 	}
@@ -111,21 +125,27 @@ export const getDate = resolve => {
 		let month = months[d.getMonth()]
 		let year = d.getFullYear()
 
-		resolve(dispatch(setDateSuccess({ year, month, date, day })))
+		if (resolve) {
+			resolve(dispatch(setDateSuccess({ year, month, date, day })))
+		} else {
+			dispatch(setDateSuccess({ year, month, date, day }))
+		}
 	}
 }
 export const initialize = () => {
 	return async dispatch => {
-		new Promise(function (resolve, reject) {
+		new Promise((resolve, reject) => {
 			dispatch(getPosition(resolve))
 		})
-			.then(
-				new Promise(function (resolve, reject) {
-					dispatch(getWeather(resolve))
+			.then(scoForApi => {
+				return new Promise((resolve, reject) => {
+					weatherAPI.getWeatherAPI(scoForApi).then(response => {
+						resolve(dispatch(setWeatherSuccess(response.data)))
+					})
 				})
-			)
+			})
 			.then(() => {
-				new Promise(function (resolve, reject) {
+				return new Promise((resolve, reject) => {
 					dispatch(getDate(resolve))
 				})
 			})
