@@ -8,52 +8,56 @@ import { weatherAPI } from '../api/weatherAPI'
 // Types
 
 const SET_WEATHER = 'SET_WEATHER'
+const SET_FORECAST = 'SET_FORECAST'
 
 // ====================================================
 // Initial state
 
 let initialState = {
-	coord: {
-		lon: null,
-		lat: null,
-	},
-	weather: [
-		{
-			id: null,
-			main: null,
-			description: null,
-			icon: null,
+	today: {
+		coord: {
+			lon: null,
+			lat: null,
 		},
-	],
-	base: null,
-	main: {
-		temp: null,
-		feels_like: null,
-		temp_min: null,
-		temp_max: null,
-		pressure: null,
-		humidity: null,
-	},
-	visibility: null,
-	wind: {
-		speed: null,
-		deg: null,
-	},
-	clouds: {
-		all: null,
-	},
-	dt: null,
-	sys: {
-		type: null,
+		weather: [
+			{
+				id: null,
+				main: null,
+				description: null,
+				icon: null,
+			},
+		],
+		base: null,
+		main: {
+			temp: null,
+			feels_like: null,
+			temp_min: null,
+			temp_max: null,
+			pressure: null,
+			humidity: null,
+		},
+		visibility: null,
+		wind: {
+			speed: null,
+			deg: null,
+		},
+		clouds: {
+			all: null,
+		},
+		dt: null,
+		sys: {
+			type: null,
+			id: null,
+			country: null,
+			sunrise: null,
+			sunset: null,
+		},
+		timezone: null,
 		id: null,
-		country: null,
-		sunrise: null,
-		sunset: null,
+		name: null,
+		cod: null,
 	},
-	timezone: null,
-	id: null,
-	name: null,
-	cod: null,
+	forecast: {},
 }
 
 // ====================================================
@@ -64,7 +68,14 @@ const weatherReducer = (state = initialState, action) => {
 		case SET_WEATHER:
 			return {
 				...state,
-				...action.payload,
+				today: { ...action.payload },
+			}
+		case SET_FORECAST:
+			return {
+				...state,
+				forecast: {
+					...action.payload,
+				},
 			}
 
 		default:
@@ -76,6 +87,10 @@ const weatherReducer = (state = initialState, action) => {
 // Action creators
 
 export const setWeatherSuccess = payload => ({ type: SET_WEATHER, payload })
+export const setForecastSuccess = payload => ({
+	type: SET_FORECAST,
+	payload,
+})
 
 // ====================================================
 // Thunks
@@ -83,11 +98,24 @@ export const setWeatherSuccess = payload => ({ type: SET_WEATHER, payload })
 export const getWeather = resolve => {
 	return async (dispatch, getState) => {
 		let state = getState()
-		weatherAPI.getWeatherAPI(state.app.position.sity).then(response => {
+		weatherAPI.getWeatherAPI(state.app.position.sco).then(response => {
 			if (resolve) {
 				resolve(dispatch(setWeatherSuccess(response.data)))
 			} else {
 				dispatch(setWeatherSuccess(response.data))
+			}
+		})
+	}
+}
+export const getForecast = (resolve, days) => {
+	return async (dispatch, getState) => {
+		let state = getState()
+
+		weatherAPI.getForecastAPI(state.app.position.sco, days).then(response => {
+			if (resolve) {
+				resolve(dispatch(setForecastSuccess(response.data)))
+			} else {
+				dispatch(setForecastSuccess(response.data))
 			}
 		})
 	}

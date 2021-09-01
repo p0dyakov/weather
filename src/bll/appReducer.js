@@ -5,7 +5,7 @@
 import { positionAPI } from '../api/positionAPI'
 import { weatherAPI } from '../api/weatherAPI'
 import { days, months } from '../variables/dateVars'
-import { getWeather, setWeatherSuccess } from './weatherReducer'
+import { getForecast, getWeather, setWeatherSuccess } from './weatherReducer'
 
 // ====================================================
 // Types
@@ -13,15 +13,18 @@ import { getWeather, setWeatherSuccess } from './weatherReducer'
 const SET_POSITION = 'SET_POSITION'
 const SET_DATE = 'SET_DATE'
 const SET_INITIALIZED = 'SET_INITIALIZED'
+const SET_SCO = 'SET_SCO'
 
 // ====================================================
 // Initial state
 
 let initialState = {
 	position: {
-		country: null,
-		region: null,
-		sity: null,
+		address: {},
+		sco: {
+			lon: null,
+			lat: null,
+		},
 	},
 	date: {
 		year: null,
@@ -40,6 +43,7 @@ const appReducer = (state = initialState, action) => {
 			return {
 				...state,
 				position: {
+					...state.position,
 					...action.payload,
 				},
 			}
@@ -58,6 +62,18 @@ const appReducer = (state = initialState, action) => {
 				initialized: action.payload,
 			}
 
+		case SET_SCO:
+			return {
+				...state,
+				position: {
+					...state.position,
+					sco: {
+						lon: action.payload.lon,
+						lat: action.payload.lat,
+					},
+				},
+			}
+
 		default:
 			return state
 	}
@@ -68,6 +84,7 @@ const appReducer = (state = initialState, action) => {
 
 export const setPositionSuccess = payload => ({ type: SET_POSITION, payload })
 export const setDateSuccess = payload => ({ type: SET_DATE, payload })
+export const setSco = payload => ({ type: SET_SCO, payload })
 export const setInitialized = payload => ({ type: SET_INITIALIZED, payload })
 
 // ====================================================
@@ -84,33 +101,20 @@ export const getPosition = resolve => {
 			positionAPI
 				.getAddress(sco)
 				.then(response => {
-					let country =
+					let address =
 						response.data.response.GeoObjectCollection.featureMember[0]
-							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[0]
-							.name
+							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components
 
-					let region =
-						response.data.response.GeoObjectCollection.featureMember[0]
-							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[2]
-							.name
-
-					let sity = response.data.response.GeoObjectCollection.featureMember[0]
-						.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components[4]
-						? response.data.response.GeoObjectCollection.featureMember[0]
-								.GeoObject.metaDataProperty.GeocoderMetaData.Address
-								.Components[4].name
-						: null
-
-					return { country, region, sity }
+					return { address }
 				})
 				.then(address => {
 					dispatch(setPositionSuccess(address))
 				})
 				.then(() => {
 					if (resolve) {
-						resolve(scoForApi)
+						resolve(dispatch(setSco(scoForApi)))
 					} else {
-						return scoForApi
+						dispatch(setSco(scoForApi))
 					}
 				})
 		})
@@ -137,11 +141,14 @@ export const initialize = () => {
 		new Promise((resolve, reject) => {
 			dispatch(getPosition(resolve))
 		})
-			.then(scoForApi => {
+			.then(() => {
 				return new Promise((resolve, reject) => {
-					weatherAPI.getWeatherAPI(scoForApi).then(response => {
-						resolve(dispatch(setWeatherSuccess(response.data)))
-					})
+					dispatch(getWeather(resolve))
+				})
+			})
+			.then(() => {
+				return new Promise((resolve, reject) => {
+					dispatch(getForecast(resolve, 16))
 				})
 			})
 			.then(() => {

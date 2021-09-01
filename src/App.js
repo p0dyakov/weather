@@ -3,6 +3,8 @@
 // Main
 import './styles/zeroing.scss'
 import './styles/style.scss'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import MainPage from './components/mainPage/mainPage.container'
 import Loading from './components/common/loading/loading'
 import { Redirect, Route } from 'react-router-dom'
@@ -10,7 +12,6 @@ import { useEffect } from 'react'
 import { initialize } from './bll/appReducer'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
-
 // ====================================================
 // Component
 
@@ -29,7 +30,7 @@ const App = props => {
 						path="/weather/:day?"
 						render={() => <MainPage key={window.location.pathname} />}
 					/>
-					<Redirect from="*" to="/weather/today" />
+					<Redirect from="*" to="/weather" />
 				</>
 			)}
 		</>

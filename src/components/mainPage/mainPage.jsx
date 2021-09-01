@@ -3,10 +3,10 @@
 // Main
 import styles from './mainPage.module.scss'
 import Header from '../common/header/header'
+import Footer from '../common/footer/footer'
 import MainInfo from './mainInfo/mainInfo.container'
-import DetailInfo from './detailInfo/detailInfo.container'
 import WeatherImage from './weatherImage/weatherImage'
-import WeatherOfTheFuture from './weatherOfTheFuture/weatherOfTheFuture'
+import Forecast from './forecast/forecastContainer'
 import classNames from 'classnames'
 import { colours } from '../../variables/coloursVars'
 
@@ -27,14 +27,14 @@ const MainPage = props => {
 				<div className={classNames('row', styles.body)}>
 					<div className={classNames('col-lg', styles.left)}>
 						<MainInfo />
-						<DetailInfo />
 					</div>
 					<div className={classNames('col-lg', styles.right)}>
 						<WeatherImage icon={props.icon} />
-						<WeatherOfTheFuture />
 					</div>
+					<Forecast />
 				</div>
 			</div>
+			<Footer />
 		</div>
 	)
 }

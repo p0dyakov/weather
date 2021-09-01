@@ -2,19 +2,19 @@
 // IMPORTS
 // Main
 import { connect } from 'react-redux'
-import { compose } from 'redux'
-import DetailInfo from './detailInfo'
+// Components
+import Forecast from './forecast'
+// Reducers
 
 // ====================================================
 // MSTP & MDTP
 
 let mapStateToProps = state => ({
-	date: state.app.date,
-	position: state.app.position,
-	weather: state.weather,
+	forecast: state.weather.forecast.list,
+	day: state.app.date.day,
 })
 
 // ====================================================
 // Compose
 
-export default compose(connect(mapStateToProps, {}))(DetailInfo)
+export default connect(mapStateToProps, {})(Forecast)

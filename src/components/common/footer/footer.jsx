@@ -1,7 +1,7 @@
 // ====================================================
 // IMPORTS
 // Main
-import styles from './alert.module.scss'
+import styles from './footer.module.scss'
 
 // ====================================================
 // Component

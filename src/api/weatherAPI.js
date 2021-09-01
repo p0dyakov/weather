@@ -16,14 +16,14 @@ const api = {
 // Requests
 
 export const weatherAPI = {
-	getWeatherAPI: scoForApi => {
+	getWeatherAPI: sco => {
 		return axios.get(
-			`${api.base}weather?lat=${scoForApi.lat}&lon=${scoForApi.lon}&units=metric&APPID=${api.key}`
+			`${api.base}weather?lat=${sco.lat}&lon=${sco.lon}&units=metric&APPID=${api.key}`
 		)
 	},
-	// getForecastForSevenDaysAPI: city => {
-	// 	return axios.get(
-	// 		`forecast/daily?q=${city}&units=metric&cnt=7&lang=en&appid=${api.key}`
-	// 	)
-	// },
+	getForecastAPI: (sco, days) => {
+		return axios.get(
+			`${api.base}forecast/daily?lat=${sco.lat}&lon=${sco.lon}&cnt=${days}&units=metric&APPID=${api.key}`
+		)
+	},
 }

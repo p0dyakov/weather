@@ -14,8 +14,8 @@ import MainPage from './mainPage'
 let mapStateToProps = state => ({
 	date: state.app.date,
 	position: state.app.position,
-	weather: state.weather,
-	icon: state.weather.weather[0].icon,
+	todayWeather: state.weather.today,
+	icon: state.weather.today.weather[0].icon,
 })
 
 // ====================================================

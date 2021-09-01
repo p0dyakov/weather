@@ -1,20 +1,43 @@
 .body {
+	width: 80%;
+	height: 100%;
+
 	.position {
-		font-size: 20px;
+		font-size: 18px;
 		font-weight: 600;
 	}
-	.time {
-	}
-	.temp {
-		font-size: 40px;
+	// .time {
+	// }
+	.tempWrap {
+		display: flex;
+		margin-top: 50px;
+		justify-content: space-between;
+		.temp {
+			font-size: 40px;
+		}
+		.feelsLike {
+			.feelsLikeTemp {
+				font-size: 25px;
+				font-weight: 500;
+			}
+			.feelsLikeTitle {
+				font-size: 11px;
+				margin-top: -10px;
+			}
+		}
 	}
 	.line {
-		width: 80%;
 		height: 1px;
 	}
 	.weather {
 		margin-top: 20px;
 		font-size: 18px;
 		font-weight: 600;
+	}
+	.detailInfo {
+		margin-top: 100px;
+		.title {
+			font-weight: 600;
+		}
 	}
 }

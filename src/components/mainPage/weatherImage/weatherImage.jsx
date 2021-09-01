@@ -9,11 +9,6 @@ import { useState } from 'react'
 // ====================================================
 // Component
 
-// const style = {
-// 	image: {
-// 		backgroundImage: ``,
-// 	},
-// }
 const WeatherImage = props => {
 	let [pathToImage, setPathToImage] = useState('')
 

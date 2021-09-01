@@ -79,9 +79,7 @@ body._lock {
 		&__link {
 			font-weight: 600;
 			font-size: 14px;
-			&:hover {
-				color: red;
-			}
+
 			@media (max-width: 767px) {
 				font-size: 24px;
 			}

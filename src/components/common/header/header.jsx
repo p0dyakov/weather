@@ -34,34 +34,34 @@ const Header = props => {
 						<nav className={styles.menu__body}>
 							<ul className={styles.menu__list}>
 								<li>
-									<NavLink
-										to="/weather/today"
+									<a
+										href="https://github.com/z-a-h-a-r"
 										className={styles.menu__link}
+										target="_blank"
 										style={style.navlink}
-										activeClassName={styles.menu__linkActive}
 									>
-										Today
-									</NavLink>
+										My GitHub
+									</a>
 								</li>
 								<li>
-									<NavLink
-										to="/weather/weekend"
-										style={style.navlink}
+									<a
+										href="https://openweathermap.org/"
 										className={styles.menu__link}
-										activeClassName={styles.menu__linkActive}
+										target="_blank"
+										style={style.navlink}
 									>
-										Weekend
-									</NavLink>
+										Weather API
+									</a>
 								</li>
 								<li>
-									<NavLink
-										to="/weather/16Days"
-										style={style.navlink}
+									<a
+										href="https://yandex.ru/dev/maps/geocoder/"
 										className={styles.menu__link}
-										activeClassName={styles.menu__linkActive}
+										target="_blank"
+										style={style.navlink}
 									>
-										16-days
-									</NavLink>
+										Geocoder API
+									</a>
 								</li>
 							</ul>
 						</nav>
