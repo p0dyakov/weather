@@ -29,15 +29,11 @@
 	.line {
 		height: 1px;
 	}
-	.weather {
-		margin-top: 20px;
-		font-size: 18px;
-		font-weight: 600;
-	}
-	.detailInfo {
-		margin-top: 100px;
-		.title {
-			font-weight: 600;
-		}
+	.cards {
+		margin-top: 50px;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 30px;
+		row-gap: 20px;
 	}
 }

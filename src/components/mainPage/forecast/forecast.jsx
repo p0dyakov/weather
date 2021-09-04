@@ -11,7 +11,8 @@ import { useState } from 'react'
 // ====================================================
 // Component
 
-let nextDay = 0
+let nextDay = 1
+let dayId = 0
 const Forecast = props => {
 	let [day, setDay] = useState(null)
 	useEffect(() => {
@@ -20,8 +21,9 @@ const Forecast = props => {
 	}, [])
 
 	const settings = {
+		arrows: false,
 		infinite: false,
-		speed: 300,
+		speed: 400,
 		slidesToShow: 6,
 		slidesToScroll: 2,
 		dots: true,
@@ -30,10 +32,19 @@ const Forecast = props => {
 		<div className={styles.body}>
 			<Slider {...settings}>
 				{props.forecast.map(weather => {
-					nextDay += 1
+					if (nextDay === 7) {
+						nextDay = 1
+					} else {
+						nextDay += 1
+					}
+					if (dayId === 16) {
+						dayId = 1
+					} else {
+						dayId += 1
+					}
 					return (
 						<div key={weather.id}>
-							<Card weather={weather} day={days[nextDay]} />
+							<Card weather={weather} day={days[nextDay - 1]} id={dayId} />
 						</div>
 					)
 				})}

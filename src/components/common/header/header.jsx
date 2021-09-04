@@ -10,10 +10,7 @@ import { colours } from '../../../variables/coloursVars'
 // Component
 
 const style = {
-	header: {
-		borderBottom: `1px ${colours.secondElementsColor} solid`,
-		background: `${colours.background}`,
-	},
+	header: {},
 	navlink: {
 		color: `${colours.firstTextColor}`,
 	},
@@ -35,6 +32,15 @@ const Header = props => {
 							<ul className={styles.menu__list}>
 								<li>
 									<a
+										href="/weather/0"
+										className={styles.menu__link}
+										style={style.navlink}
+									>
+										Weather Today
+									</a>
+								</li>
+								<li>
+									<a
 										href="https://github.com/z-a-h-a-r"
 										className={styles.menu__link}
 										target="_blank"
@@ -51,16 +57,6 @@ const Header = props => {
 										style={style.navlink}
 									>
 										Weather API
-									</a>
-								</li>
-								<li>
-									<a
-										href="https://yandex.ru/dev/maps/geocoder/"
-										className={styles.menu__link}
-										target="_blank"
-										style={style.navlink}
-									>
-										Geocoder API
 									</a>
 								</li>
 							</ul>

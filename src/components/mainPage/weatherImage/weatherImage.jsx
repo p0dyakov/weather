@@ -13,7 +13,17 @@ const WeatherImage = props => {
 	let [pathToImage, setPathToImage] = useState('')
 
 	useEffect(() => {
-		let path = '/' + selectWeatherIcon(props.icon, 'whiteTheme')
+		let path
+		if (props.match.params.day == 0) {
+			path = '/' + selectWeatherIcon(props.icon, 'whiteTheme')
+		} else {
+			path =
+				'/' +
+				selectWeatherIcon(
+					props.list[props.match.params.day - 1].weather[0].icon,
+					'whiteTheme'
+				)
+		}
 		setPathToImage((pathToImage = path))
 	}, [])
 

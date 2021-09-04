@@ -2,6 +2,7 @@
 // IMPORTS
 // Main
 import { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import { selectWeatherIcon } from '../../../../functions/selectWeatherIcon'
 import { colours } from '../../../../variables/coloursVars'
 import styles from './card.module.scss'
@@ -24,13 +25,15 @@ const Card = props => {
 		setPathToImage((pathToImage = path))
 	}, [])
 	return (
-		<div className={styles.body}>
-			<p>{props.weather.temp.day}°c</p>
-			<p>{props.day}</p>
-			<div className={styles.image}>
-				<img src={`${pathToImage}`} />
+		<NavLink to={`/weather/${props.id}/${props.day}`}>
+			<div className={styles.body}>
+				<p className={styles.temp}>{Math.round(props.weather.temp.day)}°c</p>
+				<p className={styles.day}>{props.day}</p>
+				<div className={styles.image}>
+					<img src={`${pathToImage}`} />
+				</div>
 			</div>
-		</div>
+		</NavLink>
 	)
 }
 

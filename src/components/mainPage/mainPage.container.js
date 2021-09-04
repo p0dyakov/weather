@@ -15,7 +15,6 @@ let mapStateToProps = state => ({
 	date: state.app.date,
 	position: state.app.position,
 	todayWeather: state.weather.today,
-	icon: state.weather.today.weather[0].icon,
 })
 
 // ====================================================

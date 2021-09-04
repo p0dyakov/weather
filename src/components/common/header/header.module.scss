@@ -4,6 +4,7 @@ body._lock {
 .header {
 	height: 70px;
 	margin-bottom: 100px;
+	background-color: rgba(238, 238, 238, 0.6);
 
 	// ==========================================
 
@@ -56,7 +57,7 @@ body._lock {
 
 		&__list {
 			@media (min-width: 767px) {
-				width: 600px;
+				width: 500px;
 				margin: 0;
 				display: flex;
 				justify-content: space-between;

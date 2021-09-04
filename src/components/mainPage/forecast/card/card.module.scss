@@ -2,9 +2,22 @@
 	width: 150px;
 	height: 200px;
 	padding: 3px;
-	background: rgba(224, 224, 224, 0.5);
-	border-radius: 3px;
-	margin-right: 50px;
+	background-color: rgba(238, 238, 238, 0.6);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	border-radius: 6px;
+	.temp {
+		font-size: 22px;
+		font-weight: 600;
+		color: black;
+	}
+	.day {
+		margin-top: -10px;
+		color: rgb(150, 150, 150);
+	}
+
 	.image {
 		margin: 0 auto;
 		width: 70px;

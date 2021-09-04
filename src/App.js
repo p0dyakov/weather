@@ -27,10 +27,10 @@ const App = props => {
 			) : (
 				<>
 					<Route
-						path="/weather/:day?"
+						path="/weather/:day?/:dayOfTheWeek?"
 						render={() => <MainPage key={window.location.pathname} />}
 					/>
-					<Redirect from="*" to="/weather" />
+					{/* <Redirect from="*" to="/weather/0" /> */}
 				</>
 			)}
 		</>
