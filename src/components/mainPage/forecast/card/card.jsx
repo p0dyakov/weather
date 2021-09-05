@@ -17,20 +17,15 @@ const style = {
 }
 
 const Card = props => {
-	let [pathToImage, setPathToImage] = useState('')
-
-	useEffect(() => {
-		let path =
-			'/' + selectWeatherIcon(props.weather.weather[0].icon, 'whiteTheme')
-		setPathToImage((pathToImage = path))
-	}, [])
+	let path =
+		'/' + selectWeatherIcon(props.weather.weather[0].icon, 'whiteTheme')
 	return (
 		<NavLink to={`/weather/${props.id}/${props.day}`}>
 			<div className={styles.body}>
 				<p className={styles.temp}>{Math.round(props.weather.temp.day)}°c</p>
 				<p className={styles.day}>{props.day}</p>
 				<div className={styles.image}>
-					<img src={`${pathToImage}`} />
+					<img src={`${path}`} />
 				</div>
 			</div>
 		</NavLink>

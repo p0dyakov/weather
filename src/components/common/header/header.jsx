@@ -5,6 +5,7 @@ import styles from './header.module.scss'
 import Logo from '../logo/logo'
 import { NavLink } from 'react-router-dom'
 import { colours } from '../../../variables/coloursVars'
+import Search from './search/searchContainer'
 
 // ====================================================
 // Component
@@ -31,6 +32,9 @@ const Header = props => {
 						<nav className={styles.menu__body}>
 							<ul className={styles.menu__list}>
 								<li>
+									<Search />
+								</li>
+								{/* <li>
 									<a
 										href="/weather/0"
 										className={styles.menu__link}
@@ -38,7 +42,7 @@ const Header = props => {
 									>
 										Weather Today
 									</a>
-								</li>
+								</li> */}
 								<li>
 									<a
 										href="https://github.com/z-a-h-a-r"

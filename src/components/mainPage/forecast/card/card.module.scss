@@ -1,4 +1,5 @@
 .body {
+	user-select: none;
 	width: 150px;
 	height: 200px;
 	padding: 3px;
@@ -31,5 +32,9 @@
 			right: 0;
 			object-fit: cover;
 		}
+	}
+	@media (max-width: 324px) {
+		width: 100px;
+		height: 150px;
 	}
 }

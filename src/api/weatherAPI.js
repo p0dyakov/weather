@@ -26,4 +26,14 @@ export const weatherAPI = {
 			`${api.base}forecast/daily?lat=${sco.lat}&lon=${sco.lon}&cnt=${days}&units=metric&APPID=${api.key}`
 		)
 	},
+	getWeatherWithCityAPI: city => {
+		return axios.get(
+			`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`
+		)
+	},
+	getForecastWithCityAPI: (city, days) => {
+		return axios.get(
+			`${api.base}forecast/daily?q=${city}&cnt=${days}&units=metric&APPID=${api.key}`
+		)
+	},
 }

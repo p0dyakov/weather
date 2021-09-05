@@ -10,27 +10,22 @@ import { useState } from 'react'
 // Component
 
 const WeatherImage = props => {
-	let [pathToImage, setPathToImage] = useState('')
-
-	useEffect(() => {
-		let path
-		if (props.match.params.day == 0) {
-			path = '/' + selectWeatherIcon(props.icon, 'whiteTheme')
-		} else {
-			path =
-				'/' +
-				selectWeatherIcon(
-					props.list[props.match.params.day - 1].weather[0].icon,
-					'whiteTheme'
-				)
-		}
-		setPathToImage((pathToImage = path))
-	}, [])
+	let path
+	if (props.match.params.day == 0) {
+		path = '/' + selectWeatherIcon(props.icon, 'whiteTheme')
+	} else {
+		path =
+			'/' +
+			selectWeatherIcon(
+				props.list[props.match.params.day - 1].weather[0].icon,
+				'whiteTheme'
+			)
+	}
 
 	return (
 		<div className={styles.body}>
 			<div className={styles.image}>
-				<img src={`${pathToImage}`} />
+				<img src={`${path}`} />
 			</div>
 		</div>
 	)

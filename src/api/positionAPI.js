@@ -15,9 +15,9 @@ const api = {
 // Requests
 
 export const positionAPI = {
-	getAddress: longlat => {
+	getAddress: position => {
 		return axios.get(
-			`${api.base}?apikey=${api.key}&geocode=${longlat}&format=json&lang=en_US`
+			`${api.base}?apikey=${api.key}&geocode=${position}&format=json&lang=en_US`
 		)
 	},
 }

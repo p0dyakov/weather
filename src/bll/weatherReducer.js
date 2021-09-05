@@ -95,29 +95,49 @@ export const setForecastSuccess = payload => ({
 // ====================================================
 // Thunks
 
-export const getWeather = resolve => {
+export const getWeather = (resolve, city = null) => {
 	return async (dispatch, getState) => {
-		let state = getState()
-		weatherAPI.getWeatherAPI(state.app.position.sco).then(response => {
-			if (resolve) {
-				resolve(dispatch(setWeatherSuccess(response.data)))
-			} else {
-				dispatch(setWeatherSuccess(response.data))
-			}
-		})
+		if (!city) {
+			let state = getState()
+			weatherAPI.getWeatherAPI(state.app.position.sco).then(response => {
+				if (resolve) {
+					resolve(dispatch(setWeatherSuccess(response.data)))
+				} else {
+					dispatch(setWeatherSuccess(response.data))
+				}
+			})
+		} else {
+			weatherAPI.getWeatherWithCityAPI(city).then(response => {
+				if (resolve) {
+					resolve(dispatch(setWeatherSuccess(response.data)))
+				} else {
+					dispatch(setWeatherSuccess(response.data))
+				}
+			})
+		}
 	}
 }
-export const getForecast = (resolve, days) => {
+export const getForecast = (resolve, days, city = null) => {
 	return async (dispatch, getState) => {
-		let state = getState()
-
-		weatherAPI.getForecastAPI(state.app.position.sco, days).then(response => {
-			if (resolve) {
-				resolve(dispatch(setForecastSuccess(response.data)))
-			} else {
-				dispatch(setForecastSuccess(response.data))
-			}
-		})
+		if (!city) {
+			let state = getState()
+			weatherAPI.getForecastAPI(state.app.position.sco, days).then(response => {
+				if (resolve) {
+					resolve(dispatch(setForecastSuccess(response.data)))
+				} else {
+					dispatch(setForecastSuccess(response.data))
+				}
+			})
+		} else {
+			weatherAPI.getForecastWithCityAPI(city, days).then(response => {
+				if (resolve) {
+					resolve(dispatch(setForecastSuccess(response.data)))
+				} else {
+					dispatch(setForecastSuccess(response.data))
+				}
+			})
+			debugger
+		}
 	}
 }
 

@@ -5,20 +5,19 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 // Components
-import MainPage from './mainPage'
+import Search from './search'
 // Reducers
+import { getInf, setSearching } from '../../../../bll/appReducer'
 
 // ====================================================
 // MSTP & MDTP
 
-let mapStateToProps = state => ({
-	date: state.app.date,
-	position: state.app.position,
-	todayWeather: state.weather.today,
-	searching: state.app.searching,
-})
+let mapStateToProps = state => ({})
 
 // ====================================================
 // Compose
 
-export default compose(withRouter, connect(mapStateToProps, {}))(MainPage)
+export default compose(
+	withRouter,
+	connect(mapStateToProps, { getInf, setSearching })
+)(Search)

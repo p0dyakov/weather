@@ -9,6 +9,7 @@ import WeatherImage from './weatherImage/weatherImageContainer'
 import Forecast from './forecast/forecastContainer'
 import classNames from 'classnames'
 import { colours } from '../../variables/coloursVars'
+import Loading from '../common/loading/loading'
 
 // ====================================================
 // Component
@@ -26,15 +27,21 @@ const MainPage = props => {
 			<div className={styles.content}>
 				<Header />
 				<div className="container">
-					<div className={classNames('row', styles.body)}>
-						<div className={classNames('col-lg', styles.left)}>
-							<MainInfo />
+					{props.searching ? (
+						<div className={styles.wrapperForLoading}>
+							<Loading small={true} />
 						</div>
-						<div className={classNames('col-lg', styles.right)}>
-							<WeatherImage />
+					) : (
+						<div className={classNames('row', styles.body)}>
+							<div className={classNames('col-lg', styles.left)}>
+								<MainInfo />
+							</div>
+							<div className={classNames('col-lg', styles.right)}>
+								<WeatherImage />
+							</div>
+							<Forecast />
 						</div>
-						<Forecast />
-					</div>
+					)}
 				</div>
 				<Footer />
 			</div>

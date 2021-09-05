@@ -12,8 +12,10 @@ import { getForecast, getWeather, setWeatherSuccess } from './weatherReducer'
 
 const SET_POSITION = 'SET_POSITION'
 const SET_DATE = 'SET_DATE'
+const SET_SEARCHING = 'SET_SEARCHING'
 const SET_INITIALIZED = 'SET_INITIALIZED'
 const SET_SCO = 'SET_SCO'
+const SET_CITY = 'SET_CITY'
 
 // ====================================================
 // Initial state
@@ -25,6 +27,7 @@ let initialState = {
 			lon: null,
 			lat: null,
 		},
+		city: null,
 	},
 	date: {
 		year: null,
@@ -32,6 +35,7 @@ let initialState = {
 		day: null,
 	},
 	initialized: false,
+	searching: false,
 }
 
 // ====================================================
@@ -62,6 +66,12 @@ const appReducer = (state = initialState, action) => {
 				initialized: action.payload,
 			}
 
+		case SET_SEARCHING:
+			return {
+				...state,
+				searching: action.payload,
+			}
+
 		case SET_SCO:
 			return {
 				...state,
@@ -71,6 +81,15 @@ const appReducer = (state = initialState, action) => {
 						lon: action.payload.lon,
 						lat: action.payload.lat,
 					},
+				},
+			}
+		case SET_CITY:
+			return {
+				...state,
+				position: {
+					...state.position,
+
+					city: action.payload,
 				},
 			}
 
@@ -85,21 +104,29 @@ const appReducer = (state = initialState, action) => {
 export const setPositionSuccess = payload => ({ type: SET_POSITION, payload })
 export const setDateSuccess = payload => ({ type: SET_DATE, payload })
 export const setSco = payload => ({ type: SET_SCO, payload })
+export const setCity = payload => ({ type: SET_CITY, payload })
 export const setInitialized = payload => ({ type: SET_INITIALIZED, payload })
+export const setSearching = payload => ({ type: SET_SEARCHING, payload })
 
 // ====================================================
 // Thunks
 
-export const getPosition = resolve => {
+export const getPosition = (resolve, city = null) => {
 	return async dispatch => {
 		navigator.geolocation.getCurrentPosition(function (position) {
-			let sco = `${position.coords.longitude},${position.coords.latitude}`
-			let scoForApi = {
-				lon: position.coords.longitude,
-				lat: position.coords.latitude,
+			let scoForApi
+			let positionForApi
+			if (!city) {
+				positionForApi = `${position.coords.longitude},${position.coords.latitude}`
+				scoForApi = {
+					lon: position.coords.longitude,
+					lat: position.coords.latitude,
+				}
+			} else {
+				positionForApi = city
 			}
 			positionAPI
-				.getAddress(sco)
+				.getAddress(positionForApi)
 				.then(response => {
 					let address =
 						response.data.response.GeoObjectCollection.featureMember[0]
@@ -111,15 +138,18 @@ export const getPosition = resolve => {
 					dispatch(setPositionSuccess(address))
 				})
 				.then(() => {
-					if (resolve) {
+					if (resolve && scoForApi) {
 						resolve(dispatch(setSco(scoForApi)))
-					} else {
+					} else if (scoForApi) {
 						dispatch(setSco(scoForApi))
+					} else {
+						resolve()
 					}
 				})
 		})
 	}
 }
+
 export const getDate = resolve => {
 	return async dispatch => {
 		let d = new Date()
@@ -136,31 +166,70 @@ export const getDate = resolve => {
 		}
 	}
 }
-export const initialize = () => {
+export const getInf = (city = null) => {
 	return async dispatch => {
 		new Promise((resolve, reject) => {
-			dispatch(getPosition(resolve))
+			dispatch(getPosition(resolve, city))
 		})
 			.then(() => {
 				return new Promise((resolve, reject) => {
-					dispatch(getWeather(resolve))
+					dispatch(getWeather(resolve, city))
 				})
 			})
 			.then(() => {
 				return new Promise((resolve, reject) => {
-					dispatch(getForecast(resolve, 16))
+					dispatch(getForecast(resolve, 16, city))
 				})
 			})
+
 			.then(() => {
-				return new Promise((resolve, reject) => {
-					dispatch(getDate(resolve))
-				})
+				if (!city) {
+					return new Promise((resolve, reject) => {
+						dispatch(getDate(resolve))
+					})
+				}
 			})
 			.then(() => {
-				dispatch(setInitialized(true))
+				if (!city) {
+					dispatch(setInitialized(true))
+				} else {
+					dispatch(setSearching(false))
+				}
 			})
 	}
 }
+
+// export const search = city => {
+// 	return async dispatch => {
+// 		new Promise((resolve, reject) => {
+// 			dispatch(getWeather(resolve, city))
+// 		})
+// 			.then(() => {
+// 				return new Promise((resolve, reject) => {
+// 					resolve(dispatch(setCity(city)))
+// 				})
+// 			})
+// 			.then(() => {
+// 				return new Promise((resolve, reject) => {
+// 					dispatch(getForecast(resolve, 16, city))
+// 				})
+// 			})
+// 			.then(() => {
+// 				return new Promise((resolve, reject) => {
+// 					dispatch(getPosition(resolve, city))
+// 				})
+// 			})
+// 		// })
+// 		// .then(() => {
+// 		// 	return new Promise((resolve, reject) => {
+// 		// 		dispatch(getDate(resolve))
+// 		// 	})
+// 		// })
+// 		// .then(() => {
+// 		// 	dispatch(setInitialized(true))
+// 		// })
+// 	}
+// }
 
 // ====================================================
 // Exports

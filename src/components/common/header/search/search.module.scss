@@ -1,0 +1,24 @@
+.form {
+	display: flex;
+	.input {
+		width: 200px;
+		height: 25px;
+		background: rgb(209, 209, 209);
+		border-radius: 7px 0 0 7px;
+		padding: 0 3px;
+		&:active {
+			background: rgb(209, 209, 209);
+		}
+	}
+
+	.button {
+		border-radius: 0 7px 7px 0;
+		background: rgb(209, 209, 209);
+		padding: 0 5px;
+		position: relative;
+		& img {
+			width: 20px;
+			height: 20px;
+		}
+	}
+}

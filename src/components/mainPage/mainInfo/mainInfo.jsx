@@ -49,10 +49,17 @@ const MainInfo = props => {
 	return (
 		<div className={styles.body}>
 			<p className={styles.position} style={style.position}>
-				Weather in {props.address[0] ? ' ' + props.address[0].name : ''}
-				{props.address[2] ? ', ' + props.address[2].name : ''}
-				{props.address[3] ? ', ' + props.address[3].name : ''}
-				{props.address[4] ? ', ' + props.address[4].name : ''}
+				Weather in
+				{props.city ? (
+					' ' + props.city
+				) : (
+					<>
+						{props.address[0] ? ' ' + props.address[0].name : ''}
+						{props.address[2] ? ', ' + props.address[2].name : ''}
+						{props.address[3] ? ', ' + props.address[3].name : ''}
+						{props.address[4] ? ', ' + props.address[4].name : ''}
+					</>
+				)}
 			</p>
 			<p className={styles.time} style={style.time}>
 				{isToday ? props.date.day : props.match.params.dayOfTheWeek}
