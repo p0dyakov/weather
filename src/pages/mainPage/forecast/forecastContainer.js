@@ -2,9 +2,7 @@
 // IMPORTS
 // Main
 import { connect } from 'react-redux'
-// Components
 import Forecast from './forecast'
-// Reducers
 
 // ====================================================
 // MSTP & MDTP

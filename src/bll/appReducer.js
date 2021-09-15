@@ -166,6 +166,7 @@ export const getDate = resolve => {
 		}
 	}
 }
+
 export const getInf = (city = null) => {
 	return async dispatch => {
 		new Promise((resolve, reject) => {
@@ -183,53 +184,16 @@ export const getInf = (city = null) => {
 			})
 
 			.then(() => {
-				if (!city) {
-					return new Promise((resolve, reject) => {
-						dispatch(getDate(resolve))
-					})
-				}
+				return new Promise((resolve, reject) => {
+					dispatch(getDate(resolve))
+				})
 			})
 			.then(() => {
-				if (!city) {
-					dispatch(setInitialized(true))
-				} else {
-					dispatch(setSearching(false))
-				}
+				dispatch(setSearching(false))
+				dispatch(setInitialized(true))
 			})
 	}
 }
-
-// export const search = city => {
-// 	return async dispatch => {
-// 		new Promise((resolve, reject) => {
-// 			dispatch(getWeather(resolve, city))
-// 		})
-// 			.then(() => {
-// 				return new Promise((resolve, reject) => {
-// 					resolve(dispatch(setCity(city)))
-// 				})
-// 			})
-// 			.then(() => {
-// 				return new Promise((resolve, reject) => {
-// 					dispatch(getForecast(resolve, 16, city))
-// 				})
-// 			})
-// 			.then(() => {
-// 				return new Promise((resolve, reject) => {
-// 					dispatch(getPosition(resolve, city))
-// 				})
-// 			})
-// 		// })
-// 		// .then(() => {
-// 		// 	return new Promise((resolve, reject) => {
-// 		// 		dispatch(getDate(resolve))
-// 		// 	})
-// 		// })
-// 		// .then(() => {
-// 		// 	dispatch(setInitialized(true))
-// 		// })
-// 	}
-// }
 
 // ====================================================
 // Exports

@@ -7,7 +7,7 @@ import axios from 'axios'
 // Instance
 
 const api = {
-	key: '62b0fa46-9e4d-4636-86e2-cb60bac2b943',
+	key: '015dae3c-c221-414b-b6f7-6fd7d747be49',
 	base: 'https://geocode-maps.yandex.ru/1.x/',
 }
 

@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import { colours } from '../../../variables/coloursVars'
 import Card from './card/card'
 import styles from './mainInfo.module.scss'
+import * as queryString from 'querystring'
+import { useHistory } from 'react-router'
 
 // ====================================================
 // Component
@@ -37,15 +39,24 @@ const style = {
 }
 
 const MainInfo = props => {
+	const history = useHistory()
+	let [parsedUrl, setParsedUrl] = useState(
+		queryString.parse(history.location.search.substr(1))
+	)
 	let [isToday, setIsToday] = useState(true)
 
 	useEffect(() => {
-		if (props.match.params.day == 0) {
+		setParsedUrl(queryString.parse(history.location.search.substr(1)))
+	}, [props.location.search])
+
+	useEffect(() => {
+		if (+parsedUrl.day == 0) {
 			setIsToday((isToday = true))
 		} else {
 			setIsToday((isToday = false))
 		}
 	}, [])
+
 	return (
 		<div className={styles.body}>
 			<p className={styles.position} style={style.position}>
@@ -62,14 +73,14 @@ const MainInfo = props => {
 				)}
 			</p>
 			<p className={styles.time} style={style.time}>
-				{isToday ? props.date.day : props.match.params.dayOfTheWeek}
+				{isToday ? props.date.day : '?????'}
 			</p>
 			<div className={styles.tempWrap}>
 				<p className={styles.temp} style={style.temp}>
 					{Math.round(
 						isToday
 							? props.weather.main.temp
-							: props.forecast.list[props.match.params.day - 1].temp.day
+							: props.forecast.list[+parsedUrl.day - 1].temp.day
 					)}
 					°c
 				</p>
@@ -78,7 +89,7 @@ const MainInfo = props => {
 						{Math.round(
 							isToday
 								? props.weather.main.feels_like
-								: props.forecast.list[props.match.params.day - 1].feels_like.day
+								: props.forecast.list[+parsedUrl.day - 1].feels_like.day
 						)}
 						°
 					</p>
@@ -120,38 +131,37 @@ const MainInfo = props => {
 				<div className={styles.cards}>
 					<Card
 						content={
-							props.forecast.list[props.match.params.day - 1].weather[0]
-								.description
+							props.forecast.list[+parsedUrl.day - 1].weather[0].description
 						}
 						key={window.location.pathname}
 					/>
 					<Card
 						content={`Wind speed: ${Math.round(
-							props.forecast.list[props.match.params.day - 1].speed
+							props.forecast.list[+parsedUrl.day - 1].speed
 						)} m/s`}
 						key={window.location.pathname}
 					/>
 					<Card
 						content={`Max temp: ${
-							props.forecast.list[props.match.params.day - 1].temp.max
+							props.forecast.list[+parsedUrl.day - 1].temp.max
 						}°c`}
 						key={window.location.pathname}
 					/>
 					<Card
 						content={`Min temp: ${
-							props.forecast.list[props.match.params.day - 1].temp.min
+							props.forecast.list[+parsedUrl.day - 1].temp.min
 						}°c`}
 						key={window.location.pathname}
 					/>
 					<Card
 						content={`Pressure: ${
-							props.forecast.list[props.match.params.day - 1].pressure
+							props.forecast.list[+parsedUrl.day - 1].pressure
 						} mmHg`}
 						key={window.location.pathname}
 					/>
 					<Card
 						content={`Рumidity: ${
-							props.forecast.list[props.match.params.day - 1].humidity
+							props.forecast.list[+parsedUrl.day - 1].humidity
 						}%`}
 						key={window.location.pathname}
 					/>

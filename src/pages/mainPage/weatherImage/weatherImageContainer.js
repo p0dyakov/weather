@@ -2,7 +2,7 @@
 // IMPORTS
 // Main
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { compose } from 'redux'
 import WeatherImage from './weatherImage'
 

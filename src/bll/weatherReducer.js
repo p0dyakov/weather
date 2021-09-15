@@ -136,7 +136,6 @@ export const getForecast = (resolve, days, city = null) => {
 					dispatch(setForecastSuccess(response.data))
 				}
 			})
-			debugger
 		}
 	}
 }

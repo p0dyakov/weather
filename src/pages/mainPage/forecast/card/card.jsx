@@ -1,11 +1,12 @@
 // ====================================================
 // IMPORTS
 // Main
-import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { selectWeatherIcon } from '../../../../functions/selectWeatherIcon'
 import { colours } from '../../../../variables/coloursVars'
 import styles from './card.module.scss'
+import * as queryString from 'querystring'
+import { useHistory } from 'react-router'
 
 // ====================================================
 // Component
@@ -17,10 +18,15 @@ const style = {
 }
 
 const Card = props => {
+	const history = useHistory()
+	let parsedUrl = queryString.parse(history.location.search.substr(1))
+
+	console.log()
 	let path =
 		'/' + selectWeatherIcon(props.weather.weather[0].icon, 'whiteTheme')
+
 	return (
-		<NavLink to={`/weather/${props.id}/${props.day}`}>
+		<NavLink to={`/?day=${props.id}&city=${parsedUrl.city}`}>
 			<div className={styles.body}>
 				<p className={styles.temp}>{Math.round(props.weather.temp.day)}°c</p>
 				<p className={styles.day}>{props.day}</p>

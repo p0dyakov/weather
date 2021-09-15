@@ -2,14 +2,14 @@
 // IMPORTS
 // Main
 import styles from './mainPage.module.scss'
-import Header from '../common/header/header'
-import Footer from '../common/footer/footer'
+import Header from '../../components/common/header/header'
+import Footer from '../../components/common/footer/footer'
 import MainInfo from './mainInfo/mainInfo.container'
 import WeatherImage from './weatherImage/weatherImageContainer'
 import Forecast from './forecast/forecastContainer'
 import classNames from 'classnames'
 import { colours } from '../../variables/coloursVars'
-import Loading from '../common/loading/loading'
+import Loading from '../../components/common/loading/loading'
 
 // ====================================================
 // Component
@@ -34,7 +34,7 @@ const MainPage = props => {
 					) : (
 						<div className={classNames('row', styles.body)}>
 							<div className={classNames('col-lg', styles.left)}>
-								<MainInfo />
+								<MainInfo key={window.location.pathname} />
 							</div>
 							<div className={classNames('col-lg', styles.right)}>
 								<WeatherImage />
