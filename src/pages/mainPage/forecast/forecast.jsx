@@ -61,9 +61,24 @@ const Forecast = props => {
 			},
 		],
 	}
+	const weather = {
+		temp: {
+			day: props.weatherToday.main.temp,
+		},
+		weather: [{ icon: props.weatherToday.weather[0].icon }],
+	}
 	return (
 		<div className={styles.body}>
 			<Slider {...settings}>
+				<div>
+					<Card
+						weather={weather}
+						day={'Today'}
+						id={0}
+						address={props.address}
+					/>
+				</div>
+
 				{props.forecast.map(weather => {
 					if (nextDay === 7) {
 						nextDay = 1
@@ -77,7 +92,12 @@ const Forecast = props => {
 					}
 					return (
 						<div key={weather.id}>
-							<Card weather={weather} day={days[nextDay - 1]} id={dayId} />
+							<Card
+								weather={weather}
+								day={'?'}
+								id={dayId}
+								address={props.address}
+							/>
 						</div>
 					)
 				})}

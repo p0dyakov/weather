@@ -52,7 +52,7 @@ const App = props => {
 			})
 		}
 		if (parsedUrl.city) {
-			props.getInf(parsedUrl.city)
+			props.getInf(parsedUrl.city.replace(/[^a-zа-яё0-9 ]/gi, '').trim())
 		} else {
 			props.getInf()
 		}
@@ -77,5 +77,7 @@ const App = props => {
 // ====================================================
 // Exports
 
-let mapStateToProps = state => ({ initialized: state.app.initialized })
+let mapStateToProps = state => ({
+	initialized: state.app.initialized,
+})
 export default compose(connect(mapStateToProps, { getInf }))(App)

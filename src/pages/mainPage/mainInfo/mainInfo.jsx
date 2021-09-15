@@ -47,15 +47,12 @@ const MainInfo = props => {
 
 	useEffect(() => {
 		setParsedUrl(queryString.parse(history.location.search.substr(1)))
-	}, [props.location.search])
-
-	useEffect(() => {
-		if (+parsedUrl.day == 0) {
+		if (queryString.parse(history.location.search.substr(1)).day == 0) {
 			setIsToday((isToday = true))
 		} else {
 			setIsToday((isToday = false))
 		}
-	}, [])
+	}, [props.location.search])
 
 	return (
 		<div className={styles.body}>

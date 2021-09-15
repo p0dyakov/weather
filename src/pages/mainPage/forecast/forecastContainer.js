@@ -10,6 +10,8 @@ import Forecast from './forecast'
 let mapStateToProps = state => ({
 	forecast: state.weather.forecast.list,
 	day: state.app.date.day,
+	address: state.app.position.address,
+	weatherToday: state.weather.today,
 })
 
 // ====================================================

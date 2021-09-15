@@ -21,12 +21,15 @@ const Card = props => {
 	const history = useHistory()
 	let parsedUrl = queryString.parse(history.location.search.substr(1))
 
-	console.log()
 	let path =
 		'/' + selectWeatherIcon(props.weather.weather[0].icon, 'whiteTheme')
 
 	return (
-		<NavLink to={`/?day=${props.id}&city=${parsedUrl.city}`}>
+		<NavLink
+			to={`/?day=${props.id}&city=${
+				parsedUrl.city ? parsedUrl.city : props.address[3].name
+			}`}
+		>
 			<div className={styles.body}>
 				<p className={styles.temp}>{Math.round(props.weather.temp.day)}°c</p>
 				<p className={styles.day}>{props.day}</p>
