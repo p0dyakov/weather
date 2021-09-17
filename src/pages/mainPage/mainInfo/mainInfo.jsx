@@ -70,7 +70,7 @@ const MainInfo = props => {
 				)}
 			</p>
 			<p className={styles.time} style={style.time}>
-				{isToday ? props.date.day : '?????'}
+				{props.activeDay ? props.activeDay : 'Today'}
 			</p>
 			<div className={styles.tempWrap}>
 				<p className={styles.temp} style={style.temp}>

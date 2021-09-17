@@ -13,6 +13,7 @@ import { getForecast, getWeather, setWeatherSuccess } from './weatherReducer'
 const SET_POSITION = 'SET_POSITION'
 const SET_DATE = 'SET_DATE'
 const SET_SEARCHING = 'SET_SEARCHING'
+const SET_ACTIVE_DAY = 'SET_ACTIVE_DAY'
 const SET_INITIALIZED = 'SET_INITIALIZED'
 const SET_SCO = 'SET_SCO'
 const SET_CITY = 'SET_CITY'
@@ -33,6 +34,7 @@ let initialState = {
 		year: null,
 		month: null,
 		day: null,
+		activeDay: null,
 	},
 	initialized: false,
 	searching: false,
@@ -64,6 +66,15 @@ const appReducer = (state = initialState, action) => {
 			return {
 				...state,
 				initialized: action.payload,
+			}
+
+		case SET_ACTIVE_DAY:
+			return {
+				...state,
+				date: {
+					...state.date,
+					activeDay: action.payload,
+				},
 			}
 
 		case SET_SEARCHING:
@@ -103,6 +114,7 @@ const appReducer = (state = initialState, action) => {
 
 export const setPositionSuccess = payload => ({ type: SET_POSITION, payload })
 export const setDateSuccess = payload => ({ type: SET_DATE, payload })
+export const setActiveDay = payload => ({ type: SET_ACTIVE_DAY, payload })
 export const setSco = payload => ({ type: SET_SCO, payload })
 export const setCity = payload => ({ type: SET_CITY, payload })
 export const setInitialized = payload => ({ type: SET_INITIALIZED, payload })

@@ -7,17 +7,17 @@ import Slider from 'react-slick'
 import { useEffect } from 'react'
 import { days } from '../../../variables/dateVars'
 import { useState } from 'react'
+import { useRef } from 'react'
 
 // ====================================================
 // Component
 
-let nextDay = 1
-let dayId = 0
 const Forecast = props => {
-	let [day, setDay] = useState(null)
+	const nextDay = useRef(null)
+	const dayId = useRef(null)
+
 	useEffect(() => {
-		setDay((day = days.indexOf(props.day, 0)))
-		nextDay = day
+		nextDay.current = days.indexOf(props.day, 0) + 1
 	}, [])
 
 	const settings = {
@@ -80,22 +80,23 @@ const Forecast = props => {
 				</div>
 
 				{props.forecast.map(weather => {
-					if (nextDay === 7) {
-						nextDay = 1
+					if (nextDay.current === 7) {
+						nextDay.current = 1
 					} else {
-						nextDay += 1
+						nextDay.current += 1
 					}
-					if (dayId === 16) {
-						dayId = 1
+
+					if (dayId.current === 16) {
+						dayId.current = 1
 					} else {
-						dayId += 1
+						dayId.current += 1
 					}
 					return (
 						<div key={weather.id}>
 							<Card
 								weather={weather}
-								day={'?'}
-								id={dayId}
+								day={days[nextDay.current - 1]}
+								id={dayId.current}
 								address={props.address}
 							/>
 						</div>
