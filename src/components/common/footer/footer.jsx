@@ -65,17 +65,17 @@ const Footer = () => {
 									target="_blank"
 									href="https://www.instagram.com/z_a_h_a_r_74/"
 								>
-									inst
+									instagram
 								</a>
 							</li>
 							<li>
 								<a target="_blank" href="https://vk.com/idzaharip">
-									vk
+									vkontakte
 								</a>
 							</li>
 							<li>
 								<a target="_blank" href="https://t.me/z_a_h_a_r_74/">
-									teleg
+									telegram
 								</a>
 							</li>
 						</ul>

@@ -11,3 +11,20 @@
 		user-select: none;
 	}
 }
+.specialBody {
+	width: 55px;
+	height: 55px;
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+	& span {
+		font-size: 10px;
+		user-select: none;
+	}
+
+	@media (max-width: 385px) {
+		display: none;
+	}
+}

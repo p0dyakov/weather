@@ -63,12 +63,14 @@ const Search = props => {
 								onBlur={handleBlur}
 								value={values.email}
 								placeholder={'Search your city'}
+								className={styles.input}
 							/>
 
 							<button
 								disabled={isSubmitting}
 								className={styles.button}
 								type="submit"
+								className={styles.button}
 							>
 								<img src="/images/whiteTheme/common/search.svg" alt="" />
 							</button>

@@ -43,18 +43,11 @@ const Forecast = props => {
 					dots: false,
 				},
 			},
+
 			{
-				breakpoint: 768,
+				breakpoint: 417,
 				settings: {
 					slidesToShow: 3,
-					dots: false,
-					slidesToScroll: 1,
-				},
-			},
-			{
-				breakpoint: 510,
-				settings: {
-					slidesToShow: 2,
 					dots: false,
 					slidesToScroll: 1,
 				},

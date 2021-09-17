@@ -6,8 +6,7 @@
 		font-size: 18px;
 		font-weight: 600;
 	}
-	// .time {
-	// }
+
 	.tempWrap {
 		display: flex;
 		margin-top: 50px;
@@ -35,5 +34,26 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 30px;
 		row-gap: 20px;
+	}
+
+	@media (max-width: 992px) {
+		.position {
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.time {
+			font-size: 12px;
+		}
+	}
+	@media (max-width: 768px) {
+		width: 100%;
+
+		.position {
+			font-size: 14px;
+			font-weight: 600;
+		}
+		.time {
+			font-size: 12px;
+		}
 	}
 }

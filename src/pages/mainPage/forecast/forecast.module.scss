@@ -1,3 +1,7 @@
 .body {
 	margin-top: 70px;
+
+	@media (max-width: 768px) {
+		margin-top: 0px;
+	}
 }

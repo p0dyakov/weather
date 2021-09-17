@@ -1,5 +1,7 @@
 .form {
+	width: 100%;
 	display: flex;
+
 	.input {
 		width: 200px;
 		height: 25px;
@@ -8,6 +10,10 @@
 		padding: 0 3px;
 		&:active {
 			background: rgb(209, 209, 209);
+		}
+		@media (max-width: 385px) {
+			display: flex;
+			flex-grow: 1;
 		}
 	}
 
@@ -19,6 +25,12 @@
 		& img {
 			width: 20px;
 			height: 20px;
+		}
+	}
+
+	@media (max-width: 385px) {
+		.input {
+			flex-grow: 1;
 		}
 	}
 }

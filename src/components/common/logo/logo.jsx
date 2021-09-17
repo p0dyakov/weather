@@ -15,10 +15,18 @@ const style = {
 		color: `${colours.thirdTextColor}`,
 	},
 }
-
-const Logo = () => {
+const specialStyle = {
+	background: `${colours.firstElementsColor}`,
+	'@media (max-width: 768px)': {
+		display: 'none',
+	},
+}
+const Logo = props => {
 	return (
-		<div className={styles.body} style={style.body}>
+		<div
+			className={props.displayNone ? styles.specialBody : styles.body}
+			style={style.body}
+		>
 			<span style={style.span}>Zahar's</span>
 			<span style={style.span}>Weather</span>
 			<span style={style.span}>App</span>

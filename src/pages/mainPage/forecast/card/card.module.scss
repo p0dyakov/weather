@@ -33,8 +33,22 @@
 			object-fit: cover;
 		}
 	}
-	@media (max-width: 324px) {
-		width: 100px;
-		height: 150px;
+	@media (max-width: 768px) {
+		width: 120px;
+		height: 170px;
 	}
+	@media (max-width: 576px) {
+		width: auto;
+		height: 150px;
+		margin-right: 5px;
+	}
+
+	// @media (max-width: 348px) {
+	// 	width: 130px;
+	// 	height: 180px;
+	// }
+	// @media (max-width: 348px) {
+	// 	width: 130px;
+	// 	height: 180px;
+	// }
 }

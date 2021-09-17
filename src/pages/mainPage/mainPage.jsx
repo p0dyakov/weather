@@ -33,10 +33,10 @@ const MainPage = props => {
 						</div>
 					) : (
 						<div className={classNames('row', styles.body)}>
-							<div className={classNames('col-lg', styles.left)}>
+							<div className={classNames('col-md', styles.left)}>
 								<MainInfo key={window.location.pathname} />
 							</div>
-							<div className={classNames('col-lg', styles.right)}>
+							<div className={classNames('col-md', styles.right)}>
 								<WeatherImage />
 							</div>
 							<Forecast />
