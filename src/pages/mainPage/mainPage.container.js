@@ -1,6 +1,5 @@
 // ====================================================
 // IMPORTS
-// Main
 import { connect } from 'react-redux'
 import MainPage from './mainPage'
 
@@ -15,6 +14,6 @@ let mapStateToProps = state => ({
 })
 
 // ====================================================
-// Compose
+// Exports
 
 export default connect(mapStateToProps, {})(MainPage)

@@ -1,6 +1,5 @@
 // ====================================================
 // IMPORTS
-// Main
 import styles from './mainPage.module.scss'
 import Header from '../../components/header/header'
 import Footer from '../../components/footer/footer'
@@ -8,21 +7,16 @@ import MainInfo from './mainInfo/mainInfo.container'
 import WeatherImage from './weatherImage/weatherImageContainer'
 import Forecast from './forecast/forecastContainer'
 import classNames from 'classnames'
-import { colours } from '../../variables/coloursVars'
 import Loading from '../../components/loading/loading'
+import React from 'react'
 
 // ====================================================
 // Component
 
-const style = {
-	body: {
-		background: `${colours.background}`,
-	},
-}
-
 const MainPage = props => {
+	// JSX
 	return (
-		<div className={styles.body} style={style.body}>
+		<div className={styles.body}>
 			<img src="/images/backgrounds/1.png" className={styles.background} />
 			<div className={styles.content}>
 				<Header />
@@ -52,4 +46,4 @@ const MainPage = props => {
 // ====================================================
 // Exports
 
-export default MainPage
+export default React.memo(MainPage)

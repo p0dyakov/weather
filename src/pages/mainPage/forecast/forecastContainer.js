@@ -1,6 +1,5 @@
 // ====================================================
 // IMPORTS
-// Main
 import { connect } from 'react-redux'
 import Forecast from './forecast'
 
@@ -15,6 +14,6 @@ let mapStateToProps = state => ({
 })
 
 // ====================================================
-// Compose
+// Export
 
 export default connect(mapStateToProps, {})(Forecast)

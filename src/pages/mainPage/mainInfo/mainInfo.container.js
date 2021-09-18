@@ -1,6 +1,5 @@
 // ====================================================
 // IMPORTS
-// Main
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { compose } from 'redux'
@@ -18,6 +17,6 @@ let mapStateToProps = state => ({
 })
 
 // ====================================================
-// Compose
+// Exports
 
 export default compose(withRouter, connect(mapStateToProps, {}))(MainInfo)

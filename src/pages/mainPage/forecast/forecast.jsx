@@ -1,68 +1,71 @@
 // ====================================================
 // IMPORTS
-// Main
 import styles from './forecast.module.scss'
 import Card from './card/card'
 import Slider from 'react-slick'
 import { days } from '../../../variables/dateVars'
 import { useRef } from 'react'
+import React from 'react'
 
 // ====================================================
 // Component
 
+const sliderSettings = {
+	arrows: false,
+	infinite: false,
+	speed: 400,
+	slidesToShow: 6,
+	slidesToScroll: 2,
+	dots: true,
+	responsive: [
+		{
+			breakpoint: 1200,
+			settings: {
+				slidesToShow: 5,
+				slidesToScroll: 2,
+			},
+		},
+		{
+			breakpoint: 991,
+			settings: {
+				slidesToShow: 4,
+				slidesToScroll: 2,
+				dots: false,
+			},
+		},
+
+		{
+			breakpoint: 417,
+			settings: {
+				slidesToShow: 3,
+				dots: false,
+				slidesToScroll: 1,
+			},
+		},
+	],
+}
+
 const Forecast = props => {
+	// Variables
 	const nextDay = useRef(null)
 	const nextDate = useRef(null)
 	const dayId = useRef(null)
 	const wasFirstRender = useRef(false)
-
-	const settings = {
-		arrows: false,
-		infinite: false,
-		speed: 400,
-		slidesToShow: 6,
-		slidesToScroll: 2,
-		dots: true,
-		responsive: [
-			{
-				breakpoint: 1200,
-				settings: {
-					slidesToShow: 5,
-					slidesToScroll: 2,
-				},
-			},
-			{
-				breakpoint: 991,
-				settings: {
-					slidesToShow: 4,
-					slidesToScroll: 2,
-					dots: false,
-				},
-			},
-
-			{
-				breakpoint: 417,
-				settings: {
-					slidesToShow: 3,
-					dots: false,
-					slidesToScroll: 1,
-				},
-			},
-		],
-	}
-	const weather = {
+	const propsForFirstCard = {
 		temp: {
 			day: props.weatherToday.main.temp,
 		},
 		weather: [{ icon: props.weatherToday.weather[0].icon }],
 	}
 
+	// ====================================================
+	// JSX
 	return (
 		<div className={styles.body}>
-			<Slider {...settings}>
+			<Slider {...sliderSettings}>
 				<div>
 					<Card
-						weather={weather}
+						weather={propsForFirstCard}
 						day={'Today'}
 						id={0}
 						address={props.address}
@@ -115,4 +118,4 @@ const Forecast = props => {
 // ====================================================
 // Exports
 
-export default Forecast
+export default React.memo(Forecast)

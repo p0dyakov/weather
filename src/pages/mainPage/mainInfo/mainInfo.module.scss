@@ -11,23 +11,35 @@
 		display: flex;
 		margin-top: 50px;
 		justify-content: space-between;
+
 		.temp {
 			font-size: 40px;
+			color: #ffd900;
 		}
+
 		.feelsLike {
 			.feelsLikeTemp {
 				font-size: 25px;
 				font-weight: 500;
 			}
+
 			.feelsLikeTitle {
 				font-size: 11px;
 				margin-top: -10px;
+				color: #6e6e6e;
 			}
 		}
 	}
+
+	.time {
+		color: #6e6e6e;
+	}
+
 	.line {
 		height: 1px;
+		border-bottom: 1px #bebebe solid;
 	}
+
 	.cards {
 		margin-top: 50px;
 		display: grid;
@@ -41,6 +53,7 @@
 			font-size: 14px;
 			font-weight: 600;
 		}
+
 		.time {
 			font-size: 12px;
 		}
@@ -52,6 +65,7 @@
 			font-size: 14px;
 			font-weight: 600;
 		}
+
 		.time {
 			font-size: 12px;
 		}

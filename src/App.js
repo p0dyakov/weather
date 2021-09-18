@@ -1,6 +1,5 @@
 // ====================================================
 // IMPORTS
-// Main
 import './styles/zeroing.scss'
 import './styles/style.scss'
 import 'slick-carousel/slick/slick.css'
@@ -9,7 +8,7 @@ import MainPage from './pages/mainPage/mainPage.container'
 import Loading from './components/loading/loading'
 import { Route } from 'react-router-dom'
 import { useHistory } from 'react-router'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { getInf } from './bll/appReducer'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -19,11 +18,11 @@ import * as queryString from 'querystring'
 // Component
 
 const App = props => {
+	// Variables
 	const history = useHistory()
 
 	// ====================================================
 	// Side effects
-
 	useEffect(() => {
 		const parsedUrl = queryString.parse(history.location.search.substr(1))
 
@@ -60,7 +59,6 @@ const App = props => {
 
 	// ====================================================
 	// JSX
-
 	return (
 		<>
 			{props.initialized === false ? (
@@ -80,4 +78,4 @@ const App = props => {
 let mapStateToProps = state => ({
 	initialized: state.app.initialized,
 })
-export default compose(connect(mapStateToProps, { getInf }))(App)
+export default React.memo(compose(connect(mapStateToProps, { getInf }))(App))

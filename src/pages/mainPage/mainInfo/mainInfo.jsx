@@ -2,7 +2,6 @@
 // IMPORTS
 // Main
 import React, { useEffect, useState } from 'react'
-import { colours } from '../../../variables/coloursVars'
 import Card from './card/card'
 import styles from './mainInfo.module.scss'
 import * as queryString from 'querystring'
@@ -13,36 +12,9 @@ import { days, months } from '../../../variables/dateVars'
 // ====================================================
 // Component
 
-const style = {
-	position: {
-		color: `${colours.firstTextColor}`,
-	},
-	time: {
-		color: `${colours.secondTextColor}`,
-	},
-	temp: {
-		color: `${colours.mainColor}`,
-	},
-	line: {
-		borderBottom: `1px ${colours.secondElementsColor} solid`,
-	},
-	weather: {
-		color: `${colours.firstTextColor}`,
-	},
-	title: {
-		color: `${colours.firstTextColor}`,
-	},
-	feelsLikeTemp: {
-		color: `${colours.firstTextColor}`,
-	},
-	feelsLikeTitle: {
-		color: `${colours.secondTextColor}`,
-	},
-}
-
 const MainInfo = props => {
+	// Variables
 	const history = useHistory()
-
 	let [parsedUrl, setParsedUrl] = useState(
 		queryString.parse(history.location.search.substr(1))
 	)
@@ -52,6 +24,8 @@ const MainInfo = props => {
 	let currentMonth = useRef(null)
 	let currentYear = useRef(null)
 
+	// ====================================================
+	// Side effects
 	useEffect(() => {
 		setParsedUrl(queryString.parse(history.location.search.substr(1)))
 		if (queryString.parse(history.location.search.substr(1)).day == 0) {
@@ -61,7 +35,9 @@ const MainInfo = props => {
 		}
 	}, [props.location.search])
 
-	// edit current date
+	// ====================================================
+	// Logic
+	// Ddit current date
 	if (+days.indexOf(props.date.day, 0) + +parsedUrl.day < 7) {
 		currentDay.current = +days.indexOf(props.date.day, 0) + +parsedUrl.day
 	} else {
@@ -82,9 +58,11 @@ const MainInfo = props => {
 		currentYear.current = props.date.year + 1
 	}
 
+	// ====================================================
+	// JSX
 	return (
 		<div className={styles.body}>
-			<p className={styles.position} style={style.position}>
+			<p className={styles.position}>
 				Weather in
 				{props.city ? (
 					' ' + props.city
@@ -97,14 +75,14 @@ const MainInfo = props => {
 					</>
 				)}
 			</p>
-			<p className={styles.time} style={style.time}>
+			<p className={styles.time}>
 				{parsedUrl.day == 0 ? 'Today' : days[currentDay.current]}
 				{`, ${currentDate.current}`}
 				{`, ${currentMonth.current}`}
 				{`, ${currentYear.current}`}
 			</p>
 			<div className={styles.tempWrap}>
-				<p className={styles.temp} style={style.temp}>
+				<p className={styles.temp}>
 					{Math.round(
 						isToday
 							? props.weather.main.temp
@@ -113,7 +91,7 @@ const MainInfo = props => {
 					°c
 				</p>
 				<div className={styles.feelsLike}>
-					<p className={styles.feelsLikeTemp} style={style.feelsLikeTemp}>
+					<p className={styles.feelsLikeTemp}>
 						{Math.round(
 							isToday
 								? props.weather.main.feels_like
@@ -121,12 +99,10 @@ const MainInfo = props => {
 						)}
 						°
 					</p>
-					<p className={styles.feelsLikeTitle} style={style.feelsLikeTitle}>
-						Feels Like
-					</p>
+					<p className={styles.feelsLikeTitle}>Feels Like</p>
 				</div>
 			</div>
-			<div className={styles.line} style={style.line}></div>
+			<div className={styles.line}></div>
 
 			{isToday ? (
 				<div className={styles.cards}>
@@ -197,7 +173,6 @@ const MainInfo = props => {
 			)}
 		</div>
 	)
-	return <p>adasd</p>
 }
 
 // ====================================================

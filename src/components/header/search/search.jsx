@@ -62,7 +62,7 @@ const Search = props => {
 								type="submit"
 								className={styles.button}
 							>
-								<img src="/images/whiteTheme/common/search.svg" alt="" />
+								<img src="/images/common/search.svg" alt="" />
 							</button>
 						</form>
 					</>

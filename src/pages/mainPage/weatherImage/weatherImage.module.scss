@@ -1,10 +1,12 @@
 .body {
 	display: flex;
 	justify-content: flex-end;
+
 	.image {
 		width: 400px;
 		height: 400px;
 		position: relative;
+
 		& img {
 			width: 100%;
 			height: 100%;
@@ -13,11 +15,13 @@
 			right: 0;
 			object-fit: cover;
 		}
+
 		@media (max-width: 992px) {
 			width: 300px;
 			height: 300px;
 		}
 	}
+
 	@media (max-width: 768px) {
 		justify-content: center;
 		.image {

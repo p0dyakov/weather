@@ -1,37 +1,40 @@
 // ====================================================
 // IMPORTS
-// Main
 import styles from './weatherImage.module.scss'
 import { selectWeatherIcon } from '../../../functions/selectWeatherIcon'
 import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
 import { useEffect, useState } from 'react'
+import React from 'react'
 
 // ====================================================
 // Component
 
 const WeatherImage = props => {
+	// Variables
 	let history = useHistory()
 	let path
 	let [parsedUrl, setParsedUrl] = useState(
 		queryString.parse(history.location.search.substr(1))
 	)
 
+	// ====================================================
+	// Side effects
 	useEffect(() => {
 		setParsedUrl(queryString.parse(history.location.search.substr(1)))
 	}, [props.location.search])
 
+	// ====================================================
+	// Logic
 	if (+parsedUrl.day == 0) {
-		path = '/' + selectWeatherIcon(props.icon, 'whiteTheme')
+		path = '/' + selectWeatherIcon(props.icon)
 	} else {
 		path =
-			'/' +
-			selectWeatherIcon(
-				props.list[+parsedUrl.day - 1].weather[0].icon,
-				'whiteTheme'
-			)
+			'/' + selectWeatherIcon(props.list[+parsedUrl.day - 1].weather[0].icon)
 	}
 
+	// ====================================================
+	// JSX
 	return (
 		<div className={styles.body}>
 			<div className={styles.image}>
@@ -44,4 +47,4 @@ const WeatherImage = props => {
 // ====================================================
 // Exports
 
-export default WeatherImage
+export default React.memo(WeatherImage)

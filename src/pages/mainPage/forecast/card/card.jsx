@@ -3,27 +3,22 @@
 // Main
 import { NavLink } from 'react-router-dom'
 import { selectWeatherIcon } from '../../../../functions/selectWeatherIcon'
-import { colours } from '../../../../variables/coloursVars'
 import styles from './card.module.scss'
 import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
+import React from 'react'
 
 // ====================================================
 // Component
 
-const style = {
-	body: {
-		background: `${colours.background}`,
-	},
-}
-
 const Card = props => {
+	// Variables
 	const history = useHistory()
-	let parsedUrl = queryString.parse(history.location.search.substr(1))
+	const parsedUrl = queryString.parse(history.location.search.substr(1))
+	const path = '/' + selectWeatherIcon(props.weather.weather[0].icon)
 
-	let path =
-		'/' + selectWeatherIcon(props.weather.weather[0].icon, 'whiteTheme')
-
+	// ====================================================
+	// JSX
 	return (
 		<NavLink
 			to={`/?day=${props.id}${parsedUrl.city ? '&city=' + parsedUrl.city : ''}`}
@@ -44,4 +39,4 @@ const Card = props => {
 // ====================================================
 // Exports
 
-export default Card
+export default React.memo(Card)

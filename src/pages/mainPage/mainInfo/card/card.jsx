@@ -1,18 +1,10 @@
 // ====================================================
 // IMPORTS
-// Main
-
-import { colours } from '../../../../variables/coloursVars'
+import React from 'react'
 import styles from './card.module.scss'
 
 // ====================================================
 // Component
-
-const style = {
-	body: {
-		background: `${colours.background}`,
-	},
-}
 
 const Card = props => {
 	return <div className={styles.body}>{props.content}</div>
@@ -21,4 +13,4 @@ const Card = props => {
 // ====================================================
 // Exports
 
-export default Card
+export default React.memo(Card)
