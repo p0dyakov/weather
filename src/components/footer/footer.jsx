@@ -1,12 +1,13 @@
 // ====================================================
 // IMPORTS
-// Main
+import React from 'react'
 import styles from './footer.module.scss'
 
 // ====================================================
 // Component
 
 const Footer = () => {
+	// JSX
 	return (
 		<div className={styles.footer}>
 			<div className="container">
@@ -89,4 +90,4 @@ const Footer = () => {
 // ====================================================
 // Exports
 
-export default Footer
+export default React.memo(Footer)

@@ -85,6 +85,7 @@ const appReducer = (state = initialState, action) => {
 					},
 				},
 			}
+
 		case SET_CITY:
 			return {
 				...state,
@@ -118,6 +119,7 @@ export const getPosition = (resolve, city = null) => {
 		navigator.geolocation.getCurrentPosition(function (position) {
 			let scoForApi
 			let positionForApi
+
 			if (!city) {
 				positionForApi = `${position.coords.longitude},${position.coords.latitude}`
 				scoForApi = {
@@ -127,6 +129,7 @@ export const getPosition = (resolve, city = null) => {
 			} else {
 				positionForApi = city
 			}
+
 			positionAPI
 				.getAddress(positionForApi)
 				.then(response => {
@@ -155,18 +158,17 @@ export const getPosition = (resolve, city = null) => {
 export const getDate = resolve => {
 	return async dispatch => {
 		let d = new Date()
-
 		let day = days[d.getDay() - 1]
 		let date = d.getDate()
 		let month = months[d.getMonth()]
 		let year = d.getFullYear()
 		let daysInMonth = new Date(year, d.getMonth(), 0).getDate()
 
-		if (resolve) {
-			resolve(dispatch(setDateSuccess({ year, month, date, day, daysInMonth })))
-		} else {
-			dispatch(setDateSuccess({ year, month, date, day, daysInMonth }))
-		}
+		resolve
+			? resolve(
+					dispatch(setDateSuccess({ year, month, date, day, daysInMonth }))
+			  )
+			: dispatch(setDateSuccess({ year, month, date, day, daysInMonth }))
 	}
 }
 
@@ -185,7 +187,6 @@ export const getInf = (city = null) => {
 					dispatch(getForecast(resolve, 16, city))
 				})
 			})
-
 			.then(() => {
 				return new Promise((resolve, reject) => {
 					dispatch(getDate(resolve))

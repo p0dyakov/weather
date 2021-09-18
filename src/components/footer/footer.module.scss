@@ -7,6 +7,7 @@
 	@media (max-width: 768px) {
 		margin-top: 80px;
 	}
+
 	.body {
 		display: flex;
 
@@ -19,9 +20,11 @@
 
 		.column {
 			padding: 0;
+
 			@media (max-width: 463px) {
 				margin-bottom: 50px;
 			}
+
 			& p {
 				font-weight: 600;
 				font-size: 20px;
@@ -29,6 +32,7 @@
 					text-align: center;
 				}
 			}
+
 			& ul {
 				padding: 0;
 				margin: 0;
@@ -38,6 +42,7 @@
 					@media (max-width: 463px) {
 						text-align: center;
 					}
+
 					& a {
 						color: black;
 						&:hover {
@@ -46,13 +51,6 @@
 					}
 				}
 			}
-		}
-
-		.techInfo {
-		}
-		.apis {
-		}
-		.contacs {
 		}
 	}
 }

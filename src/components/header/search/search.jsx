@@ -1,23 +1,15 @@
 // ====================================================
 // IMPORTS
-// Main
 import styles from './search.module.scss'
 import { Formik } from 'formik'
-import { colours } from '../../../../variables/coloursVars'
 import { useHistory } from 'react-router'
 import * as queryString from 'querystring'
 
 // ====================================================
 // Component
 
-const style = {
-	header: {},
-	navlink: {
-		color: `${colours.firstTextColor}`,
-	},
-}
-
 const Search = props => {
+	// Variables
 	const history = useHistory()
 	const parsedUrl = queryString.parse(history.location.search.substr(1))
 
@@ -30,8 +22,6 @@ const Search = props => {
 				initialValues={{ city: '' }}
 				validate={values => {
 					const errors = {}
-					if (!values.search) {
-					}
 					return errors
 				}}
 				onSubmit={(values, { setSubmitting }) => {

@@ -1,9 +1,8 @@
 // ====================================================
 // IMPORTS
-// Main
 import { connect } from 'react-redux'
 import Search from './search'
-import { getInf, setSearching } from '../../../../bll/appReducer'
+import { getInf, setSearching } from '../../../bll/appReducer'
 
 // ====================================================
 // MSTP & MDTP
@@ -11,6 +10,6 @@ import { getInf, setSearching } from '../../../../bll/appReducer'
 let mapStateToProps = state => ({})
 
 // ====================================================
-// Compose
+// Exports
 
 export default connect(mapStateToProps, { getInf, setSearching })(Search)

@@ -1,7 +1,6 @@
 // ====================================================
 // IMPORTS
 // Main
-
 import { weatherAPI } from '../api/weatherAPI'
 
 // ====================================================
@@ -70,6 +69,7 @@ const weatherReducer = (state = initialState, action) => {
 				...state,
 				today: { ...action.payload },
 			}
+
 		case SET_FORECAST:
 			return {
 				...state,
@@ -97,46 +97,45 @@ export const setForecastSuccess = payload => ({
 
 export const getWeather = (resolve, city = null) => {
 	return async (dispatch, getState) => {
-		if (!city) {
-			let state = getState()
-			weatherAPI.getWeatherAPI(state.app.position.sco).then(response => {
-				if (resolve) {
-					resolve(dispatch(setWeatherSuccess(response.data)))
-				} else {
-					dispatch(setWeatherSuccess(response.data))
-				}
-			})
-		} else {
-			weatherAPI.getWeatherWithCityAPI(city).then(response => {
-				if (resolve) {
-					resolve(dispatch(setWeatherSuccess(response.data)))
-				} else {
-					dispatch(setWeatherSuccess(response.data))
-				}
-			})
+		const state = getState()
+		const success = response => {
+			if (resolve) {
+				resolve(dispatch(setWeatherSuccess(response.data)))
+			} else {
+				dispatch(setWeatherSuccess(response.data))
+			}
 		}
+
+		city
+			? weatherAPI.getWeatherWithCityAPI(city).then(response => {
+					success(response)
+			  })
+			: weatherAPI.getWeatherAPI(state.app.position.sco).then(response => {
+					success(response)
+			  })
 	}
 }
+
 export const getForecast = (resolve, days, city = null) => {
 	return async (dispatch, getState) => {
-		if (!city) {
-			let state = getState()
-			weatherAPI.getForecastAPI(state.app.position.sco, days).then(response => {
-				if (resolve) {
-					resolve(dispatch(setForecastSuccess(response.data)))
-				} else {
-					dispatch(setForecastSuccess(response.data))
-				}
-			})
-		} else {
-			weatherAPI.getForecastWithCityAPI(city, days).then(response => {
-				if (resolve) {
-					resolve(dispatch(setForecastSuccess(response.data)))
-				} else {
-					dispatch(setForecastSuccess(response.data))
-				}
-			})
+		const state = getState()
+		const success = response => {
+			if (resolve) {
+				resolve(dispatch(setForecastSuccess(response.data)))
+			} else {
+				dispatch(setForecastSuccess(response.data))
+			}
 		}
+
+		city
+			? weatherAPI.getForecastWithCityAPI(city, days).then(response => {
+					success(response)
+			  })
+			: weatherAPI
+					.getForecastAPI(state.app.position.sco, days)
+					.then(response => {
+						success(response)
+					})
 	}
 }
 

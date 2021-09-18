@@ -5,25 +5,15 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	background: black;
 
 	& span {
 		font-size: 10px;
 		user-select: none;
+		color: #fff;
 	}
 }
-.specialBody {
-	width: 55px;
-	height: 55px;
-	padding: 5px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-
-	& span {
-		font-size: 10px;
-		user-select: none;
-	}
-
+.media {
 	@media (max-width: 385px) {
 		display: none;
 	}

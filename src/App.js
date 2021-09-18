@@ -6,7 +6,7 @@ import './styles/style.scss'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import MainPage from './pages/mainPage/mainPage.container'
-import Loading from './components/common/loading/loading'
+import Loading from './components/loading/loading'
 import { Route } from 'react-router-dom'
 import { useHistory } from 'react-router'
 import { useEffect } from 'react'
@@ -64,7 +64,7 @@ const App = props => {
 	return (
 		<>
 			{props.initialized === false ? (
-				<Loading small={false} />
+				<Loading />
 			) : (
 				<>
 					<Route path="/" render={() => <MainPage />} />

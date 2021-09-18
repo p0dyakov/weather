@@ -8,9 +8,11 @@
 		background: rgb(209, 209, 209);
 		border-radius: 7px 0 0 7px;
 		padding: 0 3px;
+
 		&:active {
 			background: rgb(209, 209, 209);
 		}
+
 		@media (max-width: 385px) {
 			display: flex;
 			flex-grow: 1;
@@ -22,6 +24,7 @@
 		background: rgb(209, 209, 209);
 		padding: 0 5px;
 		position: relative;
+
 		& img {
 			width: 20px;
 			height: 20px;

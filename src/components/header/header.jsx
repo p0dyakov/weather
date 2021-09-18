@@ -1,25 +1,17 @@
 // ====================================================
 // IMPORTS
-// Main
 import styles from './header.module.scss'
 import Logo from '../logo/logo'
-import { NavLink } from 'react-router-dom'
-import { colours } from '../../../variables/coloursVars'
 import Search from './search/searchContainer'
+import React from 'react'
 
 // ====================================================
 // Component
 
-const style = {
-	header: {},
-	navlink: {
-		color: `${colours.firstTextColor}`,
-	},
-}
-
-const Header = props => {
+const Header = () => {
+	// JSX
 	return (
-		<header className={styles.header} style={style.header}>
+		<header className={styles.header}>
 			<div className="container">
 				<div className={styles.inner}>
 					<Logo displayNone={true} />
@@ -34,7 +26,6 @@ const Header = props => {
 								href="https://github.com/z-a-h-a-r"
 								className={styles.link}
 								target="_blank"
-								style={style.navlink}
 							>
 								My GitHub
 							</a>
@@ -44,7 +35,6 @@ const Header = props => {
 								href="https://openweathermap.org/"
 								className={styles.link}
 								target="_blank"
-								style={style.navlink}
 							>
 								Weather API
 							</a>
@@ -59,4 +49,4 @@ const Header = props => {
 // ====================================================
 // Exports
 
-export default Header
+export default React.memo(Header)
