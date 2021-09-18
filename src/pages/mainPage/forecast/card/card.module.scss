@@ -3,20 +3,22 @@
 	width: 150px;
 	height: 200px;
 	padding: 3px;
-	background-color: rgba(238, 238, 238, 0.6);
+	background-color: rgba(218, 218, 218, 0.6);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
 	border-radius: 6px;
+
 	.temp {
 		font-size: 22px;
 		font-weight: 600;
 		color: black;
 	}
-	.day {
+	.date {
 		margin-top: -10px;
 		color: rgb(150, 150, 150);
+		font-size: 12px;
 	}
 
 	.image {
@@ -42,13 +44,4 @@
 		height: 150px;
 		margin-right: 5px;
 	}
-
-	// @media (max-width: 348px) {
-	// 	width: 130px;
-	// 	height: 180px;
-	// }
-	// @media (max-width: 348px) {
-	// 	width: 130px;
-	// 	height: 180px;
-	// }
 }

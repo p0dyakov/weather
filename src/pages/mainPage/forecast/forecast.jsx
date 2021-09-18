@@ -4,9 +4,7 @@
 import styles from './forecast.module.scss'
 import Card from './card/card'
 import Slider from 'react-slick'
-import { useEffect } from 'react'
 import { days } from '../../../variables/dateVars'
-import { useState } from 'react'
 import { useRef } from 'react'
 
 // ====================================================
@@ -14,11 +12,9 @@ import { useRef } from 'react'
 
 const Forecast = props => {
 	const nextDay = useRef(null)
+	const nextDate = useRef(null)
 	const dayId = useRef(null)
-
-	useEffect(() => {
-		nextDay.current = days.indexOf(props.day, 0) + 1
-	}, [])
+	const wasFirstRender = useRef(false)
 
 	const settings = {
 		arrows: false,
@@ -60,6 +56,7 @@ const Forecast = props => {
 		},
 		weather: [{ icon: props.weatherToday.weather[0].icon }],
 	}
+
 	return (
 		<div className={styles.body}>
 			<Slider {...settings}>
@@ -69,14 +66,26 @@ const Forecast = props => {
 						day={'Today'}
 						id={0}
 						address={props.address}
+						date={props.date.date}
 					/>
 				</div>
 
 				{props.forecast.map(weather => {
-					if (nextDay.current === 7) {
-						nextDay.current = 1
+					if (!wasFirstRender.current) {
+						wasFirstRender.current = true
+						nextDay.current = days.indexOf(props.date.day, 0) + 1
+						nextDate.current = props.date.date + 1
 					} else {
 						nextDay.current += 1
+
+						if (nextDate.current + 1 <= props.date.daysInMonth) {
+							nextDate.current += 1
+						} else {
+							nextDate.current = nextDate.current + 1 - props.date.daysInMonth
+						}
+					}
+					if (nextDay.current === 7) {
+						nextDay.current = 0
 					}
 
 					if (dayId.current === 16) {
@@ -84,13 +93,16 @@ const Forecast = props => {
 					} else {
 						dayId.current += 1
 					}
+
 					return (
 						<div key={weather.id}>
 							<Card
 								weather={weather}
-								day={days[nextDay.current - 1]}
+								day={days[nextDay.current]}
 								id={dayId.current}
 								address={props.address}
+								date={nextDate.current}
+								key={nextDate.current}
 							/>
 						</div>
 					)

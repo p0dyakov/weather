@@ -34,7 +34,7 @@ let initialState = {
 		year: null,
 		month: null,
 		day: null,
-		activeDay: null,
+		daysInMonth: null,
 	},
 	initialized: false,
 	searching: false,
@@ -66,15 +66,6 @@ const appReducer = (state = initialState, action) => {
 			return {
 				...state,
 				initialized: action.payload,
-			}
-
-		case SET_ACTIVE_DAY:
-			return {
-				...state,
-				date: {
-					...state.date,
-					activeDay: action.payload,
-				},
 			}
 
 		case SET_SEARCHING:
@@ -114,7 +105,6 @@ const appReducer = (state = initialState, action) => {
 
 export const setPositionSuccess = payload => ({ type: SET_POSITION, payload })
 export const setDateSuccess = payload => ({ type: SET_DATE, payload })
-export const setActiveDay = payload => ({ type: SET_ACTIVE_DAY, payload })
 export const setSco = payload => ({ type: SET_SCO, payload })
 export const setCity = payload => ({ type: SET_CITY, payload })
 export const setInitialized = payload => ({ type: SET_INITIALIZED, payload })
@@ -166,15 +156,16 @@ export const getDate = resolve => {
 	return async dispatch => {
 		let d = new Date()
 
-		let day = days[d.getDay()]
+		let day = days[d.getDay() - 1]
 		let date = d.getDate()
 		let month = months[d.getMonth()]
 		let year = d.getFullYear()
+		let daysInMonth = new Date(year, d.getMonth(), 0).getDate()
 
 		if (resolve) {
-			resolve(dispatch(setDateSuccess({ year, month, date, day })))
+			resolve(dispatch(setDateSuccess({ year, month, date, day, daysInMonth })))
 		} else {
-			dispatch(setDateSuccess({ year, month, date, day }))
+			dispatch(setDateSuccess({ year, month, date, day, daysInMonth }))
 		}
 	}
 }

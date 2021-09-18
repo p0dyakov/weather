@@ -1,12 +1,14 @@
 // ====================================================
 // IMPORTS
 // Main
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { colours } from '../../../variables/coloursVars'
 import Card from './card/card'
 import styles from './mainInfo.module.scss'
 import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
+import { useRef } from 'react'
+import { days, months } from '../../../variables/dateVars'
 
 // ====================================================
 // Component
@@ -40,10 +42,15 @@ const style = {
 
 const MainInfo = props => {
 	const history = useHistory()
+
 	let [parsedUrl, setParsedUrl] = useState(
 		queryString.parse(history.location.search.substr(1))
 	)
 	let [isToday, setIsToday] = useState(true)
+	let currentDay = useRef(null)
+	let currentDate = useRef(null)
+	let currentMonth = useRef(null)
+	let currentYear = useRef(null)
 
 	useEffect(() => {
 		setParsedUrl(queryString.parse(history.location.search.substr(1)))
@@ -53,6 +60,27 @@ const MainInfo = props => {
 			setIsToday((isToday = false))
 		}
 	}, [props.location.search])
+
+	// edit current date
+	if (+days.indexOf(props.date.day, 0) + +parsedUrl.day < 7) {
+		currentDay.current = +days.indexOf(props.date.day, 0) + +parsedUrl.day
+	} else {
+		let i = +days.indexOf(props.date.day, 0) + +parsedUrl.day
+		while (i > 6) {
+			i -= 7
+		}
+		currentDay.current = i
+	}
+	if (+props.date.date + +parsedUrl.day <= props.date.daysInMonth) {
+		currentDate.current = +props.date.date + +parsedUrl.day
+		currentMonth.current = props.date.month
+		currentYear.current = props.date.year
+	} else {
+		currentDate.current =
+			+props.date.date + +parsedUrl.day - props.date.daysInMonth
+		currentMonth.current = months[months.indexOf(props.date.month, 0) + 1]
+		currentYear.current = props.date.year + 1
+	}
 
 	return (
 		<div className={styles.body}>
@@ -70,7 +98,10 @@ const MainInfo = props => {
 				)}
 			</p>
 			<p className={styles.time} style={style.time}>
-				{props.activeDay ? props.activeDay : 'Today'}
+				{parsedUrl.day == 0 ? 'Today' : days[currentDay.current]}
+				{`, ${currentDate.current}`}
+				{`, ${currentMonth.current}`}
+				{`, ${currentYear.current}`}
 			</p>
 			<div className={styles.tempWrap}>
 				<p className={styles.temp} style={style.temp}>
@@ -172,4 +203,4 @@ const MainInfo = props => {
 // ====================================================
 // Exports
 
-export default MainInfo
+export default React.memo(MainInfo)

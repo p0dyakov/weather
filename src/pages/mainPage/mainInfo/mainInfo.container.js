@@ -12,7 +12,6 @@ import MainInfo from './mainInfo'
 let mapStateToProps = state => ({
 	date: state.app.date,
 	address: state.app.position.address,
-	activeDay: state.app.date.activeDay,
 	city: state.app.position.city,
 	weather: state.weather.today,
 	forecast: state.weather.forecast,
