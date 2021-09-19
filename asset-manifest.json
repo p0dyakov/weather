@@ -1,24 +1,45 @@
 {
   "files": {
     "main.css": "/weatherSite/static/css/main.7b9b31b8.chunk.css",
-    "main.js": "/weatherSite/static/js/main.ed1886b8.chunk.js",
-    "main.js.map": "/weatherSite/static/js/main.ed1886b8.chunk.js.map",
+    "main.js": "/weatherSite/static/js/main.880eab7b.chunk.js",
+    "main.js.map": "/weatherSite/static/js/main.880eab7b.chunk.js.map",
     "runtime-main.js": "/weatherSite/static/js/runtime-main.e981e71d.js",
     "runtime-main.js.map": "/weatherSite/static/js/runtime-main.e981e71d.js.map",
     "static/css/2.4bca6dce.chunk.css": "/weatherSite/static/css/2.4bca6dce.chunk.css",
-    "static/js/2.2ea4ed64.chunk.js": "/weatherSite/static/js/2.2ea4ed64.chunk.js",
-    "static/js/2.2ea4ed64.chunk.js.map": "/weatherSite/static/js/2.2ea4ed64.chunk.js.map",
+    "static/js/2.63cc57b5.chunk.js": "/weatherSite/static/js/2.63cc57b5.chunk.js",
+    "static/js/2.63cc57b5.chunk.js.map": "/weatherSite/static/js/2.63cc57b5.chunk.js.map",
     "index.html": "/weatherSite/index.html",
     "static/css/2.4bca6dce.chunk.css.map": "/weatherSite/static/css/2.4bca6dce.chunk.css.map",
     "static/css/main.7b9b31b8.chunk.css.map": "/weatherSite/static/css/main.7b9b31b8.chunk.css.map",
-    "static/js/2.2ea4ed64.chunk.js.LICENSE.txt": "/weatherSite/static/js/2.2ea4ed64.chunk.js.LICENSE.txt",
-    "static/media/slick-theme.css": "/weatherSite/static/media/slick.c94f7671.ttf"
+    "static/js/2.63cc57b5.chunk.js.LICENSE.txt": "/weatherSite/static/js/2.63cc57b5.chunk.js.LICENSE.txt",
+    "static/media/1.png": "/weatherSite/static/media/1.c12772df.png",
+    "static/media/cloud-drizzel.png": "/weatherSite/static/media/cloud-drizzel.f04c7048.png",
+    "static/media/cloud.png": "/weatherSite/static/media/cloud.2f8e8987.png",
+    "static/media/clouds.png": "/weatherSite/static/media/clouds.14e9b077.png",
+    "static/media/cold-weather.png": "/weatherSite/static/media/cold-weather.fffec82e.png",
+    "static/media/degree-celsius.png": "/weatherSite/static/media/degree-celsius.25d0a342.png",
+    "static/media/moon-clouds.png": "/weatherSite/static/media/moon-clouds.7e102575.png",
+    "static/media/moon-with-wind.png": "/weatherSite/static/media/moon-with-wind.7053494e.png",
+    "static/media/moon.png": "/weatherSite/static/media/moon.0a2b6045.png",
+    "static/media/rain.png": "/weatherSite/static/media/rain.6a689341.png",
+    "static/media/rainbow.png": "/weatherSite/static/media/rainbow.7654a663.png",
+    "static/media/rainy-weather.png": "/weatherSite/static/media/rainy-weather.a8ece65a.png",
+    "static/media/search.svg": "/weatherSite/static/media/search.f8c9c140.svg",
+    "static/media/slick-theme.css": "/weatherSite/static/media/slick.c94f7671.ttf",
+    "static/media/snow.png": "/weatherSite/static/media/snow.36767247.png",
+    "static/media/storm-weather.png": "/weatherSite/static/media/storm-weather.6b6a1456.png",
+    "static/media/storm-weather3.png": "/weatherSite/static/media/storm-weather3.97680eaa.png",
+    "static/media/sun-with-wind.png": "/weatherSite/static/media/sun-with-wind.afabdc59.png",
+    "static/media/sunset.png": "/weatherSite/static/media/sunset.1970e138.png",
+    "static/media/temperature.png": "/weatherSite/static/media/temperature.d398af09.png",
+    "static/media/warm-weather.png": "/weatherSite/static/media/warm-weather.a52bb01d.png",
+    "static/media/windy.png": "/weatherSite/static/media/windy.2941544e.png"
   },
   "entrypoints": [
     "static/js/runtime-main.e981e71d.js",
     "static/css/2.4bca6dce.chunk.css",
-    "static/js/2.2ea4ed64.chunk.js",
+    "static/js/2.63cc57b5.chunk.js",
     "static/css/main.7b9b31b8.chunk.css",
-    "static/js/main.ed1886b8.chunk.js"
+    "static/js/main.880eab7b.chunk.js"
   ]
 }
