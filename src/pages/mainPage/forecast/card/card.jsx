@@ -7,6 +7,7 @@ import styles from './card.module.scss'
 import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
 import React from 'react'
+import icon from '../../../../images/day/warm-weather.png'
 
 // ====================================================
 // Component
@@ -15,13 +16,16 @@ const Card = props => {
 	// Variables
 	const history = useHistory()
 	const parsedUrl = queryString.parse(history.location.search.substr(1))
-	const path = '/' + selectWeatherIcon(props.weather.weather[0].icon)
+	const path = require('../../../../images' +
+		selectWeatherIcon(props.weather.weather[0].icon))
 
 	// ====================================================
 	// JSX
 	return (
 		<NavLink
-			to={`/?day=${props.id}${parsedUrl.city ? '&city=' + parsedUrl.city : ''}`}
+			to={`/weatherSite/?day=${props.id}${
+				parsedUrl.city ? '&city=' + parsedUrl.city : ''
+			}`}
 		>
 			<div className={styles.body}>
 				<p className={styles.temp}>{Math.round(props.weather.temp.day)}°c</p>
@@ -29,7 +33,7 @@ const Card = props => {
 					{props.day}, {props.date}
 				</p>
 				<div className={styles.image}>
-					<img src={`${path}`} />
+					<img src={path.default} />
 				</div>
 			</div>
 		</NavLink>

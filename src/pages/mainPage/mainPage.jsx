@@ -9,6 +9,7 @@ import Forecast from './forecast/forecastContainer'
 import classNames from 'classnames'
 import Loading from '../../components/loading/loading'
 import React from 'react'
+import bg from '../../images/backgrounds/1.png'
 
 // ====================================================
 // Component
@@ -17,7 +18,7 @@ const MainPage = props => {
 	// JSX
 	return (
 		<div className={styles.body}>
-			<img src="/images/backgrounds/1.png" className={styles.background} />
+			<img src={bg} className={styles.background} />
 			<div className={styles.content}>
 				<Header />
 				<div className="container">

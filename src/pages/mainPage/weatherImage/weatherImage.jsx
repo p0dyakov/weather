@@ -6,7 +6,6 @@ import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
 import { useEffect, useState } from 'react'
 import React from 'react'
-
 // ====================================================
 // Component
 
@@ -27,10 +26,10 @@ const WeatherImage = props => {
 	// ====================================================
 	// Logic
 	if (+parsedUrl.day == 0) {
-		path = '/' + selectWeatherIcon(props.icon)
+		path = require('../../../images' + selectWeatherIcon(props.icon))
 	} else {
-		path =
-			'/' + selectWeatherIcon(props.list[+parsedUrl.day - 1].weather[0].icon)
+		path = require('../../../images' +
+			selectWeatherIcon(props.list[+parsedUrl.day - 1].weather[0].icon))
 	}
 
 	// ====================================================
@@ -38,7 +37,7 @@ const WeatherImage = props => {
 	return (
 		<div className={styles.body}>
 			<div className={styles.image}>
-				<img src={`${path}`} />
+				<img src={`${path.default}`} />
 			</div>
 		</div>
 	)

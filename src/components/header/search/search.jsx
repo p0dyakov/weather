@@ -4,6 +4,7 @@ import styles from './search.module.scss'
 import { Formik } from 'formik'
 import { useHistory } from 'react-router'
 import * as queryString from 'querystring'
+import search from '../../../images/common/search.svg'
 
 // ====================================================
 // Component
@@ -62,7 +63,7 @@ const Search = props => {
 								type="submit"
 								className={styles.button}
 							>
-								<img src="/images/common/search.svg" alt="" />
+								<img src={search} alt="" />
 							</button>
 						</form>
 					</>
