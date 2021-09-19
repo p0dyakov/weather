@@ -11,7 +11,7 @@ import store from './bll/store'
 
 ReactDOM.render(
 	<Provider store={store}>
-		<BrowserRouter>
+		<BrowserRouter basename={'/weatherSite/'}>
 			<App />
 		</BrowserRouter>
 	</Provider>,

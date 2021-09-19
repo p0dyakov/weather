@@ -106,30 +106,24 @@ const MainInfo = props => {
 
 			{isToday ? (
 				<div className={styles.cards}>
-					<Card
-						content={props.weather.weather[0].description}
-						key={window.location.pathname}
-					/>
+					<Card content={props.weather.weather[0].description} key={1} />
 					<Card
 						content={`Wind speed: ${Math.round(props.weather.wind.speed)} m/s`}
-						key={window.location.pathname}
+						key={2}
 					/>
 					<Card
 						content={`Max temp: ${props.weather.main.temp_max}°c`}
-						key={window.location.pathname}
+						key={3}
 					/>
 					<Card
 						content={`Min temp: ${props.weather.main.temp_min}°c`}
-						key={window.location.pathname}
+						key={4}
 					/>
 					<Card
 						content={`Pressure: ${props.weather.main.pressure} mmHg`}
-						key={window.location.pathname}
+						key={5}
 					/>
-					<Card
-						content={`Рumidity: ${props.weather.main.humidity}%`}
-						key={window.location.pathname}
-					/>
+					<Card content={`Рumidity: ${props.weather.main.humidity}%`} key={6} />
 				</div>
 			) : (
 				<div className={styles.cards}>
@@ -137,37 +131,37 @@ const MainInfo = props => {
 						content={
 							props.forecast.list[+parsedUrl.day - 1].weather[0].description
 						}
-						key={window.location.pathname}
+						key={7}
 					/>
 					<Card
 						content={`Wind speed: ${Math.round(
 							props.forecast.list[+parsedUrl.day - 1].speed
 						)} m/s`}
-						key={window.location.pathname}
+						key={8}
 					/>
 					<Card
 						content={`Max temp: ${
 							props.forecast.list[+parsedUrl.day - 1].temp.max
 						}°c`}
-						key={window.location.pathname}
+						key={9}
 					/>
 					<Card
 						content={`Min temp: ${
 							props.forecast.list[+parsedUrl.day - 1].temp.min
 						}°c`}
-						key={window.location.pathname}
+						key={10}
 					/>
 					<Card
 						content={`Pressure: ${
 							props.forecast.list[+parsedUrl.day - 1].pressure
 						} mmHg`}
-						key={window.location.pathname}
+						key={11}
 					/>
 					<Card
 						content={`Рumidity: ${
 							props.forecast.list[+parsedUrl.day - 1].humidity
 						}%`}
-						key={window.location.pathname}
+						key={12}
 					/>
 				</div>
 			)}
