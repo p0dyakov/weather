@@ -40,7 +40,11 @@ const MainPage = props => {
 									<Forecast />
 								</div>
 							) : (
-								<Error />
+								<Error
+									content={
+										'Find your city in the search or give the site access to your geolocation'
+									}
+								/>
 							)}
 						</>
 					)}

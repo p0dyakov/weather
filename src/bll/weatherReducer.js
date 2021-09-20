@@ -8,6 +8,7 @@ import { weatherAPI } from '../api/weatherAPI'
 
 const SET_WEATHER = 'SET_WEATHER'
 const SET_FORECAST = 'SET_FORECAST'
+const SET_ERROR = 'SET_ERROR'
 
 // ====================================================
 // Initial state

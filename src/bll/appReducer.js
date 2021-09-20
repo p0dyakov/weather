@@ -118,6 +118,23 @@ export const getPosition = (resolve, city = null) => {
 	return async dispatch => {
 		let isAllow = checkauthorizedGeoLocation()
 
+		const callPositionAPI = position => {
+			return new Promise(resolve => {
+				positionAPI
+					.getAddress(position)
+					.then(response => {
+						let address =
+							response.data.response.GeoObjectCollection.featureMember[0]
+								.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components
+
+						return { address }
+					})
+					.then(address => {
+						resolve(dispatch(setPositionSuccess(address)))
+					})
+			})
+		}
+
 		if (isAllow === true) {
 			navigator.geolocation.getCurrentPosition(position => {
 				let scoForApi
@@ -133,27 +150,19 @@ export const getPosition = (resolve, city = null) => {
 					positionForApi = city
 				}
 
-				positionAPI
-					.getAddress(positionForApi)
-					.then(response => {
-						let address =
-							response.data.response.GeoObjectCollection.featureMember[0]
-								.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components
-
-						return { address }
-					})
-					.then(address => {
-						dispatch(setPositionSuccess(address))
-					})
-					.then(() => {
-						if (resolve && scoForApi) {
-							resolve(dispatch(setSco(scoForApi)))
-						} else if (scoForApi) {
-							dispatch(setSco(scoForApi))
-						} else {
-							resolve()
-						}
-					})
+				callPositionAPI(positionForApi).then(() => {
+					if (resolve && scoForApi) {
+						resolve(dispatch(setSco(scoForApi)))
+					} else if (scoForApi) {
+						dispatch(setSco(scoForApi))
+					} else {
+						resolve()
+					}
+				})
+			})
+		} else if (city) {
+			callPositionAPI(city).then(address => {
+				resolve(dispatch(setPositionSuccess(address)))
 			})
 		} else {
 			resolve ? resolve() : resolve(dispatch(setSco({})))

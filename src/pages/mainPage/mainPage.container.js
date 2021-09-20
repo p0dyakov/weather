@@ -10,6 +10,7 @@ let mapStateToProps = state => ({
 	date: state.app.date,
 	position: state.app.position,
 	todayWeather: state.weather.today,
+	searchWeatherError: state.weather.error,
 	searching: state.app.searching,
 })
 
