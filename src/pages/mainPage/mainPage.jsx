@@ -6,6 +6,7 @@ import Footer from '../../components/footer/footer'
 import MainInfo from './mainInfo/mainInfo.container'
 import WeatherImage from './weatherImage/weatherImageContainer'
 import Forecast from './forecast/forecastContainer'
+import Error from './error/error'
 import classNames from 'classnames'
 import Loading from '../../components/loading/loading'
 import React from 'react'
@@ -27,15 +28,21 @@ const MainPage = props => {
 							<Loading />
 						</div>
 					) : (
-						<div className={classNames('row', styles.body)}>
-							<div className={classNames('col-md', styles.left)}>
-								<MainInfo key={window.location.pathname} />
-							</div>
-							<div className={classNames('col-md', styles.right)}>
-								<WeatherImage />
-							</div>
-							<Forecast />
-						</div>
+						<>
+							{props.todayWeather.id ? (
+								<div className={classNames('row', styles.body)}>
+									<div className={classNames('col-md', styles.left)}>
+										<MainInfo key={window.location.pathname} />
+									</div>
+									<div className={classNames('col-md', styles.right)}>
+										<WeatherImage />
+									</div>
+									<Forecast />
+								</div>
+							) : (
+								<Error />
+							)}
+						</>
 					)}
 				</div>
 				<Footer />

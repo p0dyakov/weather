@@ -13,49 +13,7 @@ const SET_FORECAST = 'SET_FORECAST'
 // Initial state
 
 let initialState = {
-	today: {
-		coord: {
-			lon: null,
-			lat: null,
-		},
-		weather: [
-			{
-				id: null,
-				main: null,
-				description: null,
-				icon: null,
-			},
-		],
-		base: null,
-		main: {
-			temp: null,
-			feels_like: null,
-			temp_min: null,
-			temp_max: null,
-			pressure: null,
-			humidity: null,
-		},
-		visibility: null,
-		wind: {
-			speed: null,
-			deg: null,
-		},
-		clouds: {
-			all: null,
-		},
-		dt: null,
-		sys: {
-			type: null,
-			id: null,
-			country: null,
-			sunrise: null,
-			sunset: null,
-		},
-		timezone: null,
-		id: null,
-		name: null,
-		cod: null,
-	},
+	today: {},
 	forecast: {},
 }
 
@@ -106,13 +64,17 @@ export const getWeather = (resolve, city = null) => {
 			}
 		}
 
-		city
-			? weatherAPI.getWeatherWithCityAPI(city).then(response => {
-					success(response)
-			  })
-			: weatherAPI.getWeatherAPI(state.app.position.sco).then(response => {
-					success(response)
-			  })
+		if (city) {
+			weatherAPI.getWeatherWithCityAPI(city).then(response => {
+				success(response)
+			})
+		} else if (state.app.position.sco.lat) {
+			weatherAPI.getWeatherAPI(state.app.position.sco).then(response => {
+				success(response)
+			})
+		} else {
+			success({})
+		}
 	}
 }
 
@@ -127,15 +89,17 @@ export const getForecast = (resolve, days, city = null) => {
 			}
 		}
 
-		city
-			? weatherAPI.getForecastWithCityAPI(city, days).then(response => {
-					success(response)
-			  })
-			: weatherAPI
-					.getForecastAPI(state.app.position.sco, days)
-					.then(response => {
-						success(response)
-					})
+		if (city) {
+			weatherAPI.getForecastWithCityAPI(city, days).then(response => {
+				success(response)
+			})
+		} else if (state.app.position.sco.lat) {
+			weatherAPI.getForecastAPI(state.app.position.sco, days).then(response => {
+				success(response)
+			})
+		} else {
+			success({})
+		}
 	}
 }
 

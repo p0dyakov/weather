@@ -3,9 +3,9 @@
 // Main
 
 import { positionAPI } from '../api/positionAPI'
-import { weatherAPI } from '../api/weatherAPI'
 import { days, months } from '../variables/dateVars'
-import { getForecast, getWeather, setWeatherSuccess } from './weatherReducer'
+import { getForecast, getWeather } from './weatherReducer'
+import { checkauthorizedGeoLocation } from '../functions/geolocation'
 
 // ====================================================
 // Types
@@ -116,42 +116,48 @@ export const setSearching = payload => ({ type: SET_SEARCHING, payload })
 
 export const getPosition = (resolve, city = null) => {
 	return async dispatch => {
-		navigator.geolocation.getCurrentPosition(function (position) {
-			let scoForApi
-			let positionForApi
+		let isAllow = checkauthorizedGeoLocation()
 
-			if (!city) {
-				positionForApi = `${position.coords.longitude},${position.coords.latitude}`
-				scoForApi = {
-					lon: position.coords.longitude,
-					lat: position.coords.latitude,
-				}
-			} else {
-				positionForApi = city
-			}
+		if (isAllow === true) {
+			navigator.geolocation.getCurrentPosition(position => {
+				let scoForApi
+				let positionForApi
 
-			positionAPI
-				.getAddress(positionForApi)
-				.then(response => {
-					let address =
-						response.data.response.GeoObjectCollection.featureMember[0]
-							.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components
-
-					return { address }
-				})
-				.then(address => {
-					dispatch(setPositionSuccess(address))
-				})
-				.then(() => {
-					if (resolve && scoForApi) {
-						resolve(dispatch(setSco(scoForApi)))
-					} else if (scoForApi) {
-						dispatch(setSco(scoForApi))
-					} else {
-						resolve()
+				if (!city) {
+					positionForApi = `${position.coords.longitude},${position.coords.latitude}`
+					scoForApi = {
+						lon: position.coords.longitude,
+						lat: position.coords.latitude,
 					}
-				})
-		})
+				} else {
+					positionForApi = city
+				}
+
+				positionAPI
+					.getAddress(positionForApi)
+					.then(response => {
+						let address =
+							response.data.response.GeoObjectCollection.featureMember[0]
+								.GeoObject.metaDataProperty.GeocoderMetaData.Address.Components
+
+						return { address }
+					})
+					.then(address => {
+						dispatch(setPositionSuccess(address))
+					})
+					.then(() => {
+						if (resolve && scoForApi) {
+							resolve(dispatch(setSco(scoForApi)))
+						} else if (scoForApi) {
+							dispatch(setSco(scoForApi))
+						} else {
+							resolve()
+						}
+					})
+			})
+		} else {
+			resolve ? resolve() : resolve(dispatch(setSco({})))
+		}
 	}
 }
 
