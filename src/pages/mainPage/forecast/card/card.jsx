@@ -15,7 +15,7 @@ const Card = props => {
 	// Variables
 	const history = useHistory()
 	const parsedUrl = queryString.parse(history.location.search.substr(1))
-	const path = require('../../../../assets' +
+	const path = require('../../../../images' +
 		selectWeatherIcon(props.weather.weather[0].icon))
 
 	// ====================================================

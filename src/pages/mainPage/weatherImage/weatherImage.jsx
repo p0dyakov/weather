@@ -27,9 +27,9 @@ const WeatherImage = props => {
 	// ====================================================
 	// Logic
 	if (+parsedUrl.day == 0) {
-		path = require('../../../assets' + selectWeatherIcon(props.icon))
+		path = require('../../../images' + selectWeatherIcon(props.icon))
 	} else {
-		path = require('../../../assets' +
+		path = require('../../../images' +
 			selectWeatherIcon(props.list[+parsedUrl.day - 1].weather[0].icon))
 	}
 

@@ -10,7 +10,7 @@ import Error from './error/error'
 import classNames from 'classnames'
 import Loading from '../../components/loading/loading'
 import React from 'react'
-import bg from '../../assets/backgrounds/1.png'
+import bg from '../../images/backgrounds/1.png'
 
 // ====================================================
 // Component
@@ -42,7 +42,7 @@ const MainPage = props => {
 							) : (
 								<Error
 									content={
-										'Find your city in the search or give the site access to your geolocation'
+										'Find your city in the search or give the site access to your geolocation and reload page'
 									}
 								/>
 							)}
