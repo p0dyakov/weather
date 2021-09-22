@@ -1,7 +1,8 @@
 
 # Weather site 
 
-This is my second application developed on react.
+This is my second application developed on react.  
+Url address: https://z-a-h-a-r.github.io/weatherSite/?day=0
 
 ## *API'S*
 * OpenWeather: https://openweathermap.org/
