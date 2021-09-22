@@ -1,11 +1,11 @@
 # Weather site
 
-This is my second application developed on react.  
-Url address: https://z-a-h-a-r.github.io/weatherSite/?day=0
+This is my second application developed on react.
+<a href="https://z-a-h-a-r.github.io/weatherSite/?day=0" target="_blank">Url address</a>
 
 ## *API's*
-* GeoCoder: https://yandex.ru/dev/maps/geocoder/
-* OpenWeather: https://openweathermap.org/
+* <a href="https://yandex.ru/dev/maps/geocoder/" target="_blank">GeoCoder</a>
+* <a href="https://openweathermap.org/" target="_blank">OpenWeather</a>
 
 ## *Technologies*
 * react
