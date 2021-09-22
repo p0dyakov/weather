@@ -4,8 +4,8 @@
 
 import { positionAPI } from '../api/positionAPI'
 import { days, months } from '../variables/dateVars'
-import { getForecast, getWeather } from './weatherReducer'
-import { checkauthorizedGeoLocation } from '../functions/geolocation'
+import { getForecast, getWeather } from '../reducers/weatherReducer'
+import { checkauthorizedGeoLocation } from '../utils/geolocation'
 
 // ====================================================
 // Types
@@ -13,7 +13,6 @@ import { checkauthorizedGeoLocation } from '../functions/geolocation'
 const SET_POSITION = 'SET_POSITION'
 const SET_DATE = 'SET_DATE'
 const SET_SEARCHING = 'SET_SEARCHING'
-const SET_ACTIVE_DAY = 'SET_ACTIVE_DAY'
 const SET_INITIALIZED = 'SET_INITIALIZED'
 const SET_SCO = 'SET_SCO'
 const SET_CITY = 'SET_CITY'

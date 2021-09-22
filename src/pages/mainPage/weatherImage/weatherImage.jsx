@@ -1,11 +1,12 @@
 // ====================================================
 // IMPORTS
 import styles from './weatherImage.module.scss'
-import { selectWeatherIcon } from '../../../functions/selectWeatherIcon'
+import { selectWeatherIcon } from '../../../utils/selectWeatherIcon'
 import * as queryString from 'querystring'
 import { useHistory } from 'react-router'
 import { useEffect, useState } from 'react'
 import React from 'react'
+
 // ====================================================
 // Component
 
@@ -26,9 +27,9 @@ const WeatherImage = props => {
 	// ====================================================
 	// Logic
 	if (+parsedUrl.day == 0) {
-		path = require('../../../images' + selectWeatherIcon(props.icon))
+		path = require('../../../assets' + selectWeatherIcon(props.icon))
 	} else {
-		path = require('../../../images' +
+		path = require('../../../assets' +
 			selectWeatherIcon(props.list[+parsedUrl.day - 1].weather[0].icon))
 	}
 

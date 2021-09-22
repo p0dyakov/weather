@@ -2,7 +2,7 @@
 // IMPORTS
 import { connect } from 'react-redux'
 import Search from './search'
-import { getInf, setSearching } from '../../../bll/appReducer'
+import { getInf, setSearching } from '../../../reducers/appReducer'
 
 // ====================================================
 // MSTP & MDTP

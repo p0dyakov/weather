@@ -3,8 +3,8 @@
 // Main
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import appReducer from './appReducer'
-import weatherReducer from './weatherReducer'
+import appReducer from '../reducers/appReducer'
+import weatherReducer from '../reducers/weatherReducer'
 
 // ====================================================
 // CombineReducers

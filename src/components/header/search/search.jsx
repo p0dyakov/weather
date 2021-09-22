@@ -4,7 +4,7 @@ import styles from './search.module.scss'
 import { Formik } from 'formik'
 import { useHistory } from 'react-router'
 import * as queryString from 'querystring'
-import search from '../../../images/common/search.svg'
+import search from '../../../assets/common/search.svg'
 
 // ====================================================
 // Component
