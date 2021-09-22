@@ -7,7 +7,7 @@ import axios from 'axios'
 // Instance
 
 const api = {
-	key: '08dbab0eeefe53317d2e0ad7c2a2e060',
+	key: 'key',
 	base: 'https://api.openweathermap.org/data/2.5/',
 }
 
