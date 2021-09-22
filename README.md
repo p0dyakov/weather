@@ -1,6 +1,6 @@
 # Weather site
 
-This is my second application developed on react.
+This is my second application developed on react.  
 <a href="https://z-a-h-a-r.github.io/weatherSite/?day=0" target="_blank">Url address</a>
 
 ## *API's*
