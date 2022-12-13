@@ -1,7 +1,7 @@
 # Weather site
 
 This is my second application developed on react.  
-Url address: https://p-zahar.github.io/weatherSite/?day=0
+Url address: https://p0dyakov.github.io/weather/?day=0
 
 ## *API's*
 * <a href="https://yandex.ru/dev/maps/geocoder/" target="_blank">GeoCoder</a>
